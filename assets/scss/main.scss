@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400&family=Licorice&family=Noto+Serif:wght@400;700&family=Yanone+Kaffeesatz&display=swap');
+
+$base-font: 'Lato', sans-serif;
+$serif-font: 'Noto Serif', serif;
+$thin-fonts: 'Yanone Kaffeesatz', sans-serif;
+$cursive-font: 'Licorice', cursive;
+
+.base-font { font-family: $base-font; font-weight: 400; }
+.serif-fonts { font-family: $serif-font; font-weight: 400; }
+.thin-fonts { font-family: $thin-fonts; }
+.cursive-fonts { font-family: $cursive-font; }
+
+$base-color: #333;
+$brand-color : #463313;
+
+.brand-color { color: $brand-color }
+.brand-bg { background: $brand-color; }
+
+body {
+  color: $base-color;
+  font-family: $base-font;
+  font-size: 16px;
+  font-weight: 400;
+}

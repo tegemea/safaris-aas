@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'safaris-aas',
+    title: 'African Safari Animals in action at their best | Animal Action Safaris',
     htmlAttrs: {
       lang: 'en'
     },
@@ -21,10 +21,13 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    // SCSS file for the whole project
+    '@/assets/scss/main.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '@/plugins/fontawesome.js', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -46,6 +49,11 @@ export default {
   axios: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
+  build: {},
+  // loading progress bar
+  loading: {
+    padding: '10px',
+    color: 'yellow',
+    height: '2px'
   }
 }
