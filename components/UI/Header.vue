@@ -75,7 +75,7 @@ $brand-color : #463313;
   font-weight: 300;
   background: linear-gradient(#222, #333);
   border-bottom: 1px solid #222;
-  color: white;
+  color: #ccc;
 
   .container {
     .row {
@@ -84,8 +84,13 @@ $brand-color : #463313;
 
       div {
         a {
-          color: white;
+          color: #ccc;
           margin-left: 10px;
+
+          &:hover {
+            text-decoration: none;
+            color: white;
+          }
         }
       }
     }
