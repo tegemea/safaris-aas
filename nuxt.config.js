@@ -53,7 +53,7 @@ export default {
   // loading progress bar
   loading: {
     padding: '10px',
-    color: 'yellow',
+    color: 'orange',
     height: '2px'
   }
 }

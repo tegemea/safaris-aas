@@ -2,22 +2,25 @@
   <div>
     <div class="container pt-5">
       <div class="row">
-        <div class="col-md-4" v-for="tour in tours" :key="tour.id">
+        <div class="col-md-4" v-for="tourCategory in tourCategories" :key="tourCategory.id">
           <div class="card mb-4">
             <div class="card-body p-0">
-              <NuxtLink :to="`/safari-tours/${tour.slug}`">
+              <NuxtLink :to="`/safari-tours/${tourCategory.slug}`">
                 <img 
-                  :src="`${baseURL}/storage/tour_header_photos/${tour.header_photo}`"
+                  :src="`${baseURL}/storage/tour_category_photos/${tourCategory.photo}`"
                   class="img-fluid"
-                  :alt="tour.name"
+                  :alt="tourCategory.name"
                 >
               </NuxtLink>
             </div>
-            <div class="card-body">
-              {{ tour.overview }}
+            <div class="card-body text-justify"
+              v-html="tourCategory.description.length > 150 
+              ? tourCategory.description.substring(0, 150) + '...'
+              : tourCategory.description"
+            >
             </div>
             <div class="card-footer">
-              <NuxtLink :to="`/safari-tours/${tour.slug}`">{{ tour.name }}</NuxtLink>
+              <NuxtLink :to="`/safari-tours/${tourCategory.slug}`">{{ tourCategory.name }}</NuxtLink>
             </div>
           </div>
         </div>
@@ -27,18 +30,14 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex';
 
 export default {
-  data() {
-    return {
-      tours: []
-    }
-  },
-  async fetch() {
-    this.tours = await this.$axios.get(`${this.apiURL}/tours`)
-      .then(res => this.tours = res.data)
-      .catch(err => console.log(err))
+  async asyncData({ store, $axios }) {
+
+    const { data } = await $axios.get(`${store.getters.apiURL}/tour-categories`)
+    .catch(err => console.log(err));
+    return { tourCategories : data } 
   },
   computed: {
     ...mapGetters([
