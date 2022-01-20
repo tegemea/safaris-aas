@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Destination :destination="destination" :baseURL="baseURL"/>
+    <Destination :destination="destination" :destinations="destinations" :baseURL="baseURL"/>
   </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
   async asyncData({ params, $axios, store }) {
     const { data } = await $axios.get(`${store.getters.apiURL}/destinations`)
     const destination = data.find(el => el.slug === params.slug);
-    return { destination }
+    return { destination, destinations: data }
   },
   computed: {
     ...mapGetters([ 'baseURL' ])
