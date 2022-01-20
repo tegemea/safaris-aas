@@ -5,5 +5,14 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      URL: ''
+    }
+  },
+  activated() {
+    this.URL = this.$URLs;
+  },
+}
 </script>

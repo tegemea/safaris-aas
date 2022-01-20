@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="footer">
     <div class="container">
       <div class="row">
         <div class="col-md-3">asdasd</div>
@@ -18,14 +18,12 @@
 </template>
 
 <style lang="scss" scoped>
-.container {
-  border-radius: 8px 8px 0 0;
-  padding: 0 30px;
-  color: white;
-
-  .row {
-    background: #463313;
-    padding: 5px;
+.footer {
+  background: #463313;
+  padding: 5px;
+  
+  .container {
+    color: white;
   }
 }
 </style>

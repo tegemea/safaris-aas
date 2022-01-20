@@ -169,6 +169,7 @@ $brand-color : #463313;
   position: relative;
   top: -25px;
   height: 50px;
+  z-index: 100;
   // font-size: 18px;
   justify-content: center;
   background: linear-gradient(lighten($brand-color, 15), darken($brand-color, 15));

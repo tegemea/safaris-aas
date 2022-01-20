@@ -1,16 +1,20 @@
 <template>
   <div>
-    <Destination :destination="destination" />
+    <Destination :destination="destination" :baseURL="baseURL"/>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 
 export default {
-  async asyncData({ params, $axios }) {
-    const data = await $axios.get(`http://safaris-backend.run/api/v1/destinations`)
-    const destination = data.data.find(el => el.slug === params.slug);
+  async asyncData({ params, $axios, store }) {
+    const { data } = await $axios.get(`${store.getters.apiURL}/destinations`)
+    const destination = data.find(el => el.slug === params.slug);
     return { destination }
+  },
+  computed: {
+    ...mapGetters([ 'baseURL' ])
   }
 }
 </script>
