@@ -2,7 +2,7 @@
   <div>
     <div class="container pt-5">
       <div class="row">
-        <div class="col-md-4" v-for="tourCategory in tourCategories" :key="tourCategory.id">
+        <div class="col-md-6" v-for="tourCategory in tourCategories" :key="tourCategory.id">
           <div class="card mb-4">
             <div class="card-body p-0">
               <NuxtLink :to="`/safari-tours/${tourCategory.slug}`">
@@ -36,7 +36,6 @@ export default {
   async asyncData({ store, $axios }) {
 
     const { data } = await $axios.get(`${store.getters.apiURL}/tour-categories`)
-    .catch(err => console.log(err));
     return { tourCategories : data } 
   },
   computed: {

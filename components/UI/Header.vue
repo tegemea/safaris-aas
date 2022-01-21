@@ -18,8 +18,11 @@
       <div class="container pb-4">
         <div class="row px-2">
           <div class="logo-container">
-            <NuxtLink to="/">
-              <img src="http://safaris-backend.run/storage/generic_photos/logo-white-transparent.png" class="img-fluid logo" alt="">
+            <NuxtLink to="/" class="logo">
+              <img 
+                src="http://safaris-backend.run/storage/generic_photos/logo-white-transparent.png" 
+                class="img-fluid" alt=""
+              >
             </NuxtLink>
           </div>
           <div class="contacts-container">
@@ -66,8 +69,30 @@
   </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      //
+    }
+  }
+}
+</script>
+
 <style lang="scss" scoped>
-$brand-color : #463313;
+@import '@/assets/scss/main';
+
+a.nuxt-link-active {
+  font-weight: bold;
+  color: $brand-color;
+}
+/* exact link will show the chosen color for only the exact matching link */
+a.nuxt-link-exact-active:not(.logo) {
+  color: $orange-color !important;
+  text-shadow: 0 1px 3px #000;
+  border: 1px dashed $orange-color !important;
+  cursor: default;
+}
 
 .topbar {
   padding: 4px 0;
@@ -86,6 +111,9 @@ $brand-color : #463313;
         a {
           color: #ccc;
           margin-left: 10px;
+          padding: 2px 4px;
+          border-radius: 4px;
+          transition: all .3s ease;
 
           &:hover {
             text-decoration: none;
@@ -182,9 +210,17 @@ $brand-color : #463313;
 
     a {
       display: block;
-      padding: 10px 25px;
+      padding: 7px 15px;
       color: white;
       text-decoration: none;
+      margin: 5px 5px;
+      border-radius: 8px;
+      border: 1px dashed rgba($color: $brand-color, $alpha: .3);
+      transition: all .3s ease;
+
+      &:hover {
+        border: 1px dashed $orange-color;
+      }
     }
   }
 }

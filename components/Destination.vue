@@ -116,7 +116,7 @@ export default {
 
           &:hover {
             color: white;
-            background: $brand-color;
+            background: $orange-color;
             text-decoration: none;
 
             .link-sub-text {

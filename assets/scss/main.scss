@@ -12,9 +12,12 @@ $cursive-font: 'Licorice', cursive;
 
 $base-color: #333;
 $brand-color : #463313;
+$orange-color : orange;
 
 .brand-color { color: $brand-color }
-.brand-bg { background: $brand-color; }
+.orange-color { color: $orange-color }
+.orange-bg { background: $orange-color }
+.brand-bg { background: $brand-color }
 
 body {
   color: $base-color;

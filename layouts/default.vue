@@ -5,3 +5,7 @@
     <div class="container-fluid p-0"><UIFooter /></div>
   </div>
 </template>
+
+<style lang="scss">
+// 
+</style>
