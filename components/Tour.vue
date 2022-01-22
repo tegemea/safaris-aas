@@ -23,31 +23,33 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-12 mb-3">
-          <div class="card">
-            <div class="card-body">
-              <div class="row d-flex justify-content-center align-items-center">
-                <div class="col-4 pl-5">
-                  <ul class="list-unstyled text-black-50 ml-5">
-                    <h5 v-for="c in tour.categories" :key="c.id"><fai :icon="['fas','angle-right']" class="mr-2"></fai>{{ c.name }}</h5>
-                  </ul>
-                </div>
-                <div class="col-4 text-center">
-                  <img :src="`${baseURL}/storage/country_flags/${tour.country.flag}`" alt="" style="max-width: 70px; border-radius: 8px">
-                  <h4 class="thin-fonts mt-3">
-                    {{ tour.days.length }} {{ tour.days.length > 1 ? 'Days' : 'Day' }} {{ tour.country.name }} Safari
-                  </h4>
-                </div>
-                <div class="col-4 text-center">
-                  <button class="btn btn-warning thin-fonts">
-                    <h4 class="py-2 pt-3"><fai :icon="['fas','angle-right']" class="mr-2"></fai>Make Booking for this Tour</h4>
-                  </button>
+        
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-12 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <ul class="list-unstyled text-black-50">
+                        <h5 v-for="c in tour.categories" :key="c.id"><fai :icon="['fas','angle-right']" class="mr-2"></fai>{{ c.name }}</h5>
+                      </ul>
+                    </div>
+                    <div class="text-center">
+                      <img :src="`${baseURL}/storage/country_flags/${tour.country.flag}`" alt="" style="max-width: 70px; border-radius: 8px">
+                      <h4 class="thin-fonts mt-3">
+                        {{ tour.days.length }} {{ tour.days.length > 1 ? 'Days' : 'Day' }} {{ tour.country.name }} Safari
+                      </h4>
+                    </div>
+                    <div v-if="tour.price" class="text-center">
+                      <span class="serif-fonts text-black-50">from only</span> <br>
+                      <span class="tour-price thin-fonts">US$ {{ numberWithCommas(Math.floor(tour.price)) }}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-8">
           <div class="text-justify serif-fonts mb-4" v-html="tour.overview"></div>
           <div v-for="(day, i) in tour.days" :key="day.id" class="mb-4">
             <div class="card days">
@@ -80,6 +82,7 @@
         </div>
         
         <div class="col-lg-4">
+          <MinSafariBookingForm :tour="tour" />
           <div v-for="category in tour.categories" class="card mb-3" :key="category.id">
             <h4 class="card-header thin-fonts brand-color">Other {{ category.name }}</h4>
             <div class="card-body p-0">
@@ -120,6 +123,11 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    numberWithCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
   }
 }
 </script>
@@ -135,6 +143,11 @@ a.nuxt-link-exact-active {
   color: rgba($color: orange, $alpha: 1.0) !important;
   text-decoration: none;
   cursor: default;
+}
+
+.tour-price {
+  font-size: 60px;
+  color: darken($orange-color, 15);
 }
 
 .days {
