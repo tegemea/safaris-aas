@@ -5,7 +5,7 @@
         <div class="col-md-6" v-for="tourCategory in tourCategories" :key="tourCategory.id">
           <div class="card mb-4">
             <div class="card-body p-0">
-              <NuxtLink :to="`/safari-tours/${tourCategory.slug}`">
+              <NuxtLink :to="`/safari-tours/${tourCategory.slug}`" :title="tourCategory.name">
                 <img 
                   :src="`${baseURL}/storage/tour_category_photos/${tourCategory.photo}`"
                   class="img-fluid"
@@ -19,9 +19,22 @@
               : tourCategory.description"
             >
             </div>
-            <div class="card-footer">
-              <NuxtLink :to="`/safari-tours/${tourCategory.slug}`">{{ tourCategory.name }}</NuxtLink>
-            </div>
+            <h4 class="card-footer thin-fonts">
+              <NuxtLink 
+                :to="`/safari-tours/${tourCategory.slug}`"
+                :title="tourCategory.name"
+                class="orange-color"
+              >
+                <div class="badge badge-pill badge-secondary">
+                  <fai :icon="['fas','angle-right']" class="mr-1"></fai>
+                  View {{ tourCategory.name }}
+                  <span v-if="tourCategory.tours.length" class="text-white-50">
+                    - {{ tourCategory.tours.length }}
+                      {{ tourCategory.tours.length > 1 ? 'tours' : 'tour' }}
+                  </span>
+                </div>
+              </NuxtLink>
+            </h4>
           </div>
         </div>
       </div>

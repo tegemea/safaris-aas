@@ -49,7 +49,7 @@
         </div>
       </div>
     </div>
-    <div class="menu">
+    <div v-on:scroll="scrollHandler" class="menu">
       <div class="container">
         <div class="row">
           <div class="col-12 p-0">
@@ -74,6 +74,17 @@ export default {
   data() {
     return {
       //
+    }
+  },
+  mounted() {
+    document.addEventListener('scroll', this.scrollHandler())
+  },
+  unmounted() {
+    document.removeEventListener('scroll', this.scrollHandler())
+  },
+  methods: {
+    scrollHandler: function(e) {
+      console.log('scrolling today...', e)
     }
   }
 }
