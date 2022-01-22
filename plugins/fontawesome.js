@@ -6,6 +6,7 @@ import { faPhoneAlt } from '@fortawesome/free-solid-svg-icons'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 import { faHeadset } from '@fortawesome/free-solid-svg-icons'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faSkype } from '@fortawesome/free-brands-svg-icons'
@@ -14,7 +15,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(
   faUserSecret, 
   faPhoneAlt, 
-  faHeadset, 
+  faHeadset,
+  faSpinner, 
   faFacebook, 
   faTwitter, 
   faSkype, 

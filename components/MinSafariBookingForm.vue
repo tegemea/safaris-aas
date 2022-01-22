@@ -29,9 +29,12 @@
             </label>
           </div>
           <button @click.prevent="validateData" class="btn btn-lg w-100 orange-bg text-white">
-            <fai :icon="['fas', booking.buttonIcon]" class="mr-2"></fai>
+            <fai :icon="['fas', booking.buttonIcon]" class="fa-fw mr-2" :class="{ 'fa-spin': booking.processing }"></fai>
             {{ tour.price ? 'MAKE BOOKING' : 'ENQUIRE' }}
           </button>
+          <div v-if="booking.showStatusMessage" class="mt-3 border rounded bg-success text-white p-2">
+            Success, your message have been sent..!
+          </div>
         </form>
       </div>
     </div>
@@ -47,7 +50,8 @@ export default {
   data() {
     return {
       booking: {
-        name: '', email:'', message:'', emailCopy: false, buttonIcon: 'angle-right'
+        name: '', email:'', message:'', emailCopy: false, buttonIcon: 'angle-right', 
+        processing: false, showStatusMessage: false
       }
     }
   },
@@ -56,8 +60,18 @@ export default {
       this.sendBooking()
     },
     sendBooking() {
+      this.booking.buttonIcon = 'spinner'; this.booking.processing = true
+      
       setTimeout(() => {
-        console.log('sent..!')
+        this.booking.buttonIcon = 'angle-right'; 
+        this.booking.processing = false;
+        this.showSelfDismissAlert()
+      }, 3000)
+    },
+    showSelfDismissAlert() {
+      this.booking.showStatusMessage = true;
+      setTimeout(() => {
+        this.booking.showStatusMessage = false;
       }, 3000)
     }
   }
