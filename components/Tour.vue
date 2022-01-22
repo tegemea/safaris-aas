@@ -81,22 +81,30 @@
           </div>
         </div>
         
+        <!-- Tour sidebar -->
         <div class="col-lg-4">
-          <MinSafariBookingForm :tour="tour" />
-          <div v-for="category in tour.categories" class="card mb-3" :key="category.id">
-            <h4 class="card-header thin-fonts brand-color">Other {{ category.name }}</h4>
-            <div class="card-body p-0">
-              <ul class="list-group list-group-flush">
-                <NuxtLink 
-                  v-for="theTour in category.tours" 
-                  :to="`/tour/${theTour.slug}`" 
-                  :key="theTour.id"
-                  class="list-group-item thin-fonts text-black-50"
-                >
-                  <fai :icon="['fas','angle-right']" class="mr-2"></fai>
-                  {{ theTour.name }}
-                </NuxtLink>
-              </ul>
+          <div class="sticky">
+            <MinSafariBookingForm :tour="tour" />
+            <div v-if="tour.days.length > 1" class="mb-3">
+              <img :src="`${baseURL}/storage/tour_feature_photos/${tour.feature_photo}`" 
+                class="img-fluid rounded" :alt="`${tour.name} feature photo`"
+              >
+            </div>
+            <div v-for="category in tour.categories" class="card mb-3" :key="category.id">
+              <h4 class="card-header thin-fonts brand-color">Other {{ category.name }}</h4>
+              <div class="card-body p-0">
+                <ul class="list-group list-group-flush">
+                  <NuxtLink 
+                    v-for="theTour in category.tours" 
+                    :to="`/tour/${theTour.slug}`" 
+                    :key="theTour.id"
+                    class="list-group-item thin-fonts text-black-50"
+                  >
+                    <fai :icon="['fas','angle-right']" class="mr-2"></fai>
+                    {{ theTour.name }}
+                  </NuxtLink>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -143,6 +151,12 @@ a.nuxt-link-exact-active {
   color: rgba($color: orange, $alpha: 1.0) !important;
   text-decoration: none;
   cursor: default;
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 30px;
 }
 
 .tour-price {
