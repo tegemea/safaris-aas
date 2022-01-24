@@ -213,7 +213,7 @@ a.nuxt-link-exact-active:not(.logo) {
   justify-content: center;
   background: linear-gradient(lighten($brand-color, 15), darken($brand-color, 15));
   border-radius: 8px;
-  box-shadow: 0 1px 3px 0 #333;
+  box-shadow: 0 1px 3px 0 #000;
 
   li {
     padding: 0;
@@ -226,7 +226,7 @@ a.nuxt-link-exact-active:not(.logo) {
       text-decoration: none;
       margin: 5px 5px;
       border-radius: 8px;
-      border: 1px dashed rgba($color: $brand-color, $alpha: .3);
+      border: 1px dashed rgba($color: $brand-color, $alpha: .1);
       transition: all .3s ease;
 
       &:hover {
