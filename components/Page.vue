@@ -8,7 +8,7 @@
           :alt="page.photo"
         >
         <div class="overlay"></div>
-        <div class="title serif-fonts">{{ page.name }}</div>
+        <div class="title serif-fonts text-capitalize">{{ page.name }}</div>
       </div>
     </div>
     <div class="container">
