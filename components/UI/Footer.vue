@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-3">
-          <h4 class="thin-fonts">About us</h4>
+          <!-- <h4 class="thin-fonts">About us</h4>
           <div class="text-justify" v-if="aboutUsPage" 
             v-html="aboutUsPage.description.length > 140 
             ? `${aboutUsPage.description.substring(0, 140)}...` 
@@ -14,7 +14,16 @@
             :title="`Read More ${aboutUsPage.name}`"
           >
             <fai :icon="['fas','angle-right']" class="mr-2"></fai>{{ aboutUsPage.name }}
-          </a>
+          </a> -->
+          <h4 class="thin-fonts">Company Links</h4>
+          <NuxtLink 
+            v-for="fPage in pages" :key="fPage.id"
+            :to="`/about-us/${fPage.slug}`"
+            class="link d-block thin-fonts"
+          >
+            <fai :icon="['fas','angle-right']" class="mr-2"></fai>
+            {{ fPage.name }}
+          </NuxtLink>
         </div>
         <div class="col-md-3">
           <h4 class="thin-fonts">Tanzania Safari Tours</h4>
