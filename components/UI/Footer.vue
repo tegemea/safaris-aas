@@ -4,30 +4,41 @@
       <div class="row">
         <div class="col-md-3">
           <h4 class="thin-fonts">About us</h4>
+          <div class="text-justify" v-if="aboutUsPage" 
+            v-html="aboutUsPage.description.length > 140 
+            ? `${aboutUsPage.description.substring(0, 140)}...` 
+            : aboutUsPage.description"
+          ></div>
+          <a v-if="aboutUsPage" class="d-inline-block thin-fonts orange-color mt-3" 
+            :href="`/about-us/${aboutUsPage.slug}`"
+            :title="`Read More ${aboutUsPage.name}`"
+          >
+            <fai :icon="['fas','angle-right']" class="mr-2"></fai>{{ aboutUsPage.name }}
+          </a>
         </div>
         <div class="col-md-3">
           <h4 class="thin-fonts">Tanzania Safari Tours</h4>
           <NuxtLink
-            v-for="footerTourCategory in tourCategoriesWithTours"
-            :key="footerTourCategory.id" 
-            :to="`/safari-tours/${footerTourCategory.slug}`"
+            v-for="fTourCategory in tourCategoriesWithTours"
+            :key="fTourCategory.id" 
+            :to="`/safari-tours/${fTourCategory.slug}`"
             class="link d-block thin-fonts"
           >
             <fai :icon="['fas','angle-right']" class="mr-2"></fai>
-            {{ footerTourCategory.name }}
+            {{ fTourCategory.name }} ({{ fTourCategory.tours.length }} {{ fTourCategory.tours.length > 1 ? 'tours' : 'tour' }})
           </NuxtLink>
         </div>
         <div class="col-md-3">
           <h4 class="thin-fonts">Safari Destinations</h4>
           <NuxtLink 
-            v-for="footerDestination in destinations"
-            :to="`/destinations/${footerDestination.slug}`" 
-            :key="footerDestination.id" 
+            v-for="fDestination in destinations"
+            :to="`/destinations/${fDestination.slug}`" 
+            :key="fDestination.id" 
             class="link d-block thin-fonts"
-            :title="footerDestination.name"
+            :title="fDestination.name"
           >
           <fai :icon="['fas','angle-right']" class="mr-2"></fai>
-          {{ footerDestination.name }}
+          {{ fDestination.name }}
           </NuxtLink>
         </div>
         <div class="col-md-3">
@@ -48,35 +59,19 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  data() {
-    return {
-      destinations: [], tourCategories: []
-    }
-  },
-  fetch() {
-    this.getDestinations();
-    this.getTourCategories();
-  },
   computed: {
     ...mapGetters([
-      'apiURL'
+      'pages',
+      'tourCategories',
+      'destinations'
     ]),
+    aboutUsPage: function() {
+      return this.pages.find(p => p.slug.includes("about"));
+    },
     tourCategoriesWithTours: function() {
       return this.tourCategories.filter(c => c.tours.length > 0);
     }
   },
-  methods: {
-    async getDestinations() {
-      const { data } = await this.$axios.get(`${this.apiURL}/destinations`)
-      .catch(err => console.log(err));
-      this.destinations = data;
-    },
-    async getTourCategories() {
-      const { data } = await this.$axios.get(`${this.apiURL}/tour-categories`)
-      .catch(err => console.log(err));
-      this.tourCategories = data;
-    }
-  }
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="header">
     <div class="topbar">
       <div class="container">
         <div class="row">
@@ -49,7 +49,7 @@
         </div>
       </div>
     </div>
-    <div v-on:scroll="scrollHandler" class="menu">
+    <div class="menu" id="menu">
       <div class="container">
         <div class="row">
           <div class="col-12 p-0">
@@ -57,7 +57,14 @@
               <li><NuxtLink to="/">Home</NuxtLink></li>
               <li><NuxtLink to="/safari-tours">Safaris & Tours</NuxtLink></li>
               <li><NuxtLink to="/destinations">Safari Destinations</NuxtLink></li>
-              <li><NuxtLink to="/about-us">About us</NuxtLink></li>
+              <li>
+                <NuxtLink to="/about-us">About us</NuxtLink>
+                <ul class="dropdown">
+                  <li v-for="hPage in pages" :key="hPage.id">
+                    <NuxtLink :to="`/about-us/${hPage.slug}`">{{ hPage.name }}</NuxtLink>
+                  </li>
+                </ul>
+              </li>
               <li><NuxtLink to="/blog">Blog</NuxtLink></li>
               <li><NuxtLink to="#">Contact us</NuxtLink></li>
               <li><NuxtLink to="/bookings">Bookings</NuxtLink></li>
@@ -70,22 +77,16 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
-  data() {
-    return {
-      //
-    }
+  computed: {
+    ...mapGetters([
+      'pages'
+    ])
   },
-  mounted() {
-    document.addEventListener('scroll', this.scrollHandler())
-  },
-  unmounted() {
-    document.removeEventListener('scroll', this.scrollHandler())
-  },
-  methods: {
-    scrollHandler: function(e) {
-      console.log('scrolling today...', e)
-    }
+  async fetch() {
+    // const 
   }
 }
 </script>
