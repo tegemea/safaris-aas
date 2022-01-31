@@ -127,6 +127,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/scss/main';
 
+// styles for main menus
 .menu ul li a.nuxt-link-active {
   font-weight: bold;
   // color: $brand-color;
@@ -139,6 +140,7 @@ export default {
   cursor: default;
 }
 
+// styles for dropdown menus
 .menu ul li ul li a.nuxt-link-active {
   font-weight: bold;
   // color: $brand-color;
@@ -146,10 +148,12 @@ export default {
 /* exact link will show the chosen color for only the exact matching link */
 .menu ul li ul li a.nuxt-link-exact-active:not(.logo) {
   color: #000 !important;
-  text-shadow: none;
-  border: 1px dashed $orange-color !important;
+  text-shadow: 0 1px 1px $orange-color;
+  border: none !important;
   cursor: default;
 }
+
+
 
 .topbar {
   padding: 4px 0;
