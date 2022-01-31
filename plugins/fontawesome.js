@@ -7,6 +7,7 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 import { faHeadset } from '@fortawesome/free-solid-svg-icons'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { faPaw } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faSkype } from '@fortawesome/free-brands-svg-icons'
@@ -16,7 +17,8 @@ library.add(
   faUserSecret, 
   faPhoneAlt, 
   faHeadset,
-  faSpinner, 
+  faSpinner,
+  faPaw,
   faFacebook, 
   faTwitter, 
   faSkype, 

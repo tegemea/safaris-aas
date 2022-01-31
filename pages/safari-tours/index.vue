@@ -13,8 +13,12 @@
                 >
               </NuxtLink>
             </div>
-            <h1 class="thin-fonts card-body pb-0">
-              <NuxtLink :to="`/safari-tours/${tourCategory.slug}`" class="text-black-50 text-decoration-none">
+            <h1 class="thin-fonts card-body pb-0 ellipsis">
+              <NuxtLink :to="`/safari-tours/${tourCategory.slug}`" 
+                class="text-black-50 text-decoration-none"
+                :title="tourCategory.name"
+              >
+                <fai :icon="['fas','paw']" class="brand-color mr-2"></fai>
                 {{ tourCategory.name }}
               </NuxtLink>
             </h1>
@@ -27,13 +31,13 @@
             <h4 class="card-footer thin-fonts">
               <NuxtLink 
                 :to="`/safari-tours/${tourCategory.slug}`"
-                :title="tourCategory.name"
+                :title="`View ${tourCategory.name}`"
                 class="orange-color"
               >
                 <div class="badge badge-pill badge-secondary">
                   <fai :icon="['fas','angle-right']" class="mr-1"></fai>
                   View {{ tourCategory.name }}
-                  <span v-if="tourCategory.tours.length" class="text-white-50">
+                  <span v-if="tourCategory.tours.length" class="text-warning">
                     - {{ tourCategory.tours.length }}
                       {{ tourCategory.tours.length > 1 ? 'tours' : 'tour' }}
                   </span>
