@@ -13,7 +13,12 @@
                 >
               </NuxtLink>
             </div>
-            <div class="card-body text-justify"
+            <h1 class="thin-fonts card-body pb-0">
+              <NuxtLink :to="`/safari-tours/${tourCategory.slug}`" class="text-black-50 text-decoration-none">
+                {{ tourCategory.name }}
+              </NuxtLink>
+            </h1>
+            <div class="card-body text-justify pt-0"
               v-html="tourCategory.description.length > 150 
               ? tourCategory.description.substring(0, 150) + '...'
               : tourCategory.description"
