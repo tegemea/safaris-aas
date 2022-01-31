@@ -74,9 +74,9 @@ export default {
       'tourCategories',
       'destinations'
     ]),
-    aboutUsPage: function() {
-      return this.pages.find(p => p.slug.includes("about"));
-    },
+    // aboutUsPage: function() {
+    //   return this.pages.find(p => p.slug.includes("about"));
+    // },
     tourCategoriesWithTours: function() {
       return this.tourCategories.filter(c => c.tours.length > 0);
     }

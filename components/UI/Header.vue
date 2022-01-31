@@ -5,8 +5,8 @@
         <div class="row">
           <div class="col-md-6">Welcome to Animal Action Safaris, where you see African Animals in Action..!</div>
           <div class="col-md-6 text-right">
-            <NuxtLink to="/about-us">About us</NuxtLink>
-            <NuxtLink to="#">Partners & Affilications</NuxtLink>
+            <NuxtLink to="/about-us/about-us">About us</NuxtLink>
+            <!-- <NuxtLink to="#">Partners & Affilications</NuxtLink> -->
             <NuxtLink to="/blog">Blog</NuxtLink>
             <NuxtLink to="#">Contact us</NuxtLink>
             <NuxtLink to="#">Book a Trip</NuxtLink>
@@ -41,29 +41,62 @@
               </span>
             </span>
             <span class="socials pl-4">
-              <a href="#" target="_blank" title="Follow us on Facebook"><fai :icon="['fab', 'facebook']" class="fa-2x text-warning" /></a>
-              <a href="#" target="_blank" title="Follow us on Twitter"><fai :icon="['fab', 'twitter']" class="fa-2x ml-3 text-warning" /></a>
-              <a href="#" target="_blank" title="Contact us on Skype"><fai :icon="['fab', 'skype']" class="fa-2x ml-3 text-warning" /></a>
+              <a href="#" target="_blank" title="Follow us on Facebook">
+                <fai :icon="['fab', 'facebook']" class="fa-2x text-warning" />
+              </a>
+              <a href="#" target="_blank" title="Follow us on Twitter">
+                <fai :icon="['fab', 'twitter']" class="fa-2x ml-3 text-warning" />
+              </a>
+              <a href="#" target="_blank" title="Contact us on Skype">
+                <fai :icon="['fab', 'skype']" class="fa-2x ml-3 text-warning" />
+              </a>
             </span>
           </div>
         </div>
       </div>
     </div>
+    
+    <!-- Main Navigation -->
     <div class="menu" id="menu">
       <div class="container">
         <div class="row">
           <div class="col-12 p-0">
             <ul class="list-unstyled text-uppercase">
               <li><NuxtLink to="/">Home</NuxtLink></li>
-              <li><NuxtLink to="/safari-tours">Safaris & Tours</NuxtLink></li>
-              <li><NuxtLink to="/destinations">Safari Destinations</NuxtLink></li>
               <li>
-                <NuxtLink to="/about-us">About us</NuxtLink>
-                <ul class="dropdown">
-                  <li v-for="hPage in pages" :key="hPage.id">
-                    <NuxtLink :to="`/about-us/${hPage.slug}`">{{ hPage.name }}</NuxtLink>
-                  </li>
-                </ul>
+                <NuxtLink to="/safari-tours">Safaris & Tours</NuxtLink>
+                <span class="dropdown">
+                  <ul class="dropdown-ul">
+                    <li v-for="hTourCategory in tourCategories" :key="hTourCategory.id">
+                      <NuxtLink :to="`/safari-tours/${hTourCategory.slug}`" class="d-flex justify-content-between align-items-center">
+                        {{ hTourCategory.name }} 
+                        <span v-if="hTourCategory.tours.length" 
+                          class="badge badge-pill ml-3 badge-dark">{{ hTourCategory.tours.length }}
+                        </span>
+                      </NuxtLink>
+                    </li>
+                  </ul>
+                </span>
+              </li>
+              <li>
+                <NuxtLink to="/destinations">Safari Destinations</NuxtLink>
+                <span class="dropdown">
+                  <ul class="dropdown-ul">
+                    <li v-for="hDestination in destinations" :key="hDestination.id">
+                      <NuxtLink :to="`/destinations/${hDestination.slug}`">{{ hDestination.name }}</NuxtLink>
+                    </li>
+                  </ul>
+                </span>
+              </li>
+              <li>
+                <NuxtLink to="#">About us</NuxtLink>
+                <span class="dropdown">
+                  <ul class="dropdown-ul">
+                    <li v-for="hPage in pages" :key="hPage.id">
+                      <NuxtLink :to="`/about-us/${hPage.slug}`">{{ hPage.name }}</NuxtLink>
+                    </li>
+                  </ul>
+                </span>
               </li>
               <li><NuxtLink to="/blog">Blog</NuxtLink></li>
               <li><NuxtLink to="#">Contact us</NuxtLink></li>
@@ -82,7 +115,7 @@ import { mapGetters } from 'vuex';
 export default {
   computed: {
     ...mapGetters([
-      'pages'
+      'pages','tourCategories','destinations'
     ])
   },
   async fetch() {
@@ -94,14 +127,26 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/scss/main';
 
-a.nuxt-link-active {
+.menu ul li a.nuxt-link-active {
   font-weight: bold;
-  color: $brand-color;
+  // color: $brand-color;
 }
 /* exact link will show the chosen color for only the exact matching link */
-a.nuxt-link-exact-active:not(.logo) {
+.menu ul li a.nuxt-link-exact-active:not(.logo) {
   color: $orange-color !important;
   text-shadow: 0 1px 3px #000;
+  border: 1px dashed $orange-color !important;
+  cursor: default;
+}
+
+.menu ul li ul li a.nuxt-link-active {
+  font-weight: bold;
+  // color: $brand-color;
+}
+/* exact link will show the chosen color for only the exact matching link */
+.menu ul li ul li a.nuxt-link-exact-active:not(.logo) {
+  color: #000 !important;
+  text-shadow: none;
   border: 1px dashed $orange-color !important;
   cursor: default;
 }
@@ -204,34 +249,94 @@ a.nuxt-link-exact-active:not(.logo) {
 
 }
 
-.menu ul {
-  display: flex;
-  position: relative;
-  top: -25px;
-  height: 50px;
-  z-index: 100;
-  // font-size: 18px;
-  justify-content: center;
-  background: linear-gradient(lighten($brand-color, 15), darken($brand-color, 15));
-  border-radius: 8px;
-  box-shadow: 0 1px 3px 0 #000;
+.menu {
+    ul {
+    display: flex;
+    position: relative;
+    top: -25px;
+    height: 50px;
+    z-index: 100;
+    justify-content: center;
+    background: linear-gradient(lighten($brand-color, 15), darken($brand-color, 15));
+    border-radius: 8px;
+    box-shadow: 0 1px 3px 0 #000;
 
-  li {
-    padding: 0;
-    margin: 0;
-
-    a {
-      display: block;
-      padding: 7px 15px;
-      color: white;
-      text-decoration: none;
-      margin: 5px 5px;
-      border-radius: 8px;
-      border: 1px dashed rgba($color: $brand-color, $alpha: .1);
-      transition: all .3s ease;
+    li {
+      padding: 0;
+      margin: 0;
+      position: relative;
 
       &:hover {
-        border: 1px dashed $orange-color;
+        .dropdown {
+          display: flex;
+        }
+      }
+
+      a {
+        display: block;
+        padding: 7px 15px;
+        color: white;
+        text-decoration: none;
+        margin: 5px 5px;
+        border-radius: 8px;
+        border: 1px dashed rgba($color: $brand-color, $alpha: .1);
+        transition: all .3s ease;
+
+        &:hover {
+          border: 1px dashed $orange-color;
+        }
+      }
+
+      .dropdown {
+        position: absolute;
+        display: none;
+        left: 0; top: 50px;
+        padding: 10px 0;
+        // border: 2px solid red;
+
+        ul.dropdown-ul {
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          top: 0;
+          height: 100%;
+          z-index: 100;
+          padding: 0;
+          margin: 0;
+          list-style: none;
+          justify-content: start;
+          align-items: flex-start;
+          background: linear-gradient(lighten($orange-color, 0), darken($orange-color, 20));
+          border-radius: 8px;
+          box-shadow: 0 1px 3px 0 #000;
+          font-family: $thin-fonts;
+          font-size: 1.1rem;
+          // border: 2px solid green;
+
+          li {
+            border-bottom: 1px dashed transparentize($color: #fff, $amount: .6);
+            width: 100%;
+
+            &:last-child {
+              border-bottom: none;
+            }
+             
+             a {
+              padding: 9px 20px 7px 20px;
+              color: white;
+              text-decoration: none;
+              margin: 0;
+              border-radius: 0;
+              white-space: nowrap;
+              border: none;
+              transition: all .3s ease;
+
+              &:hover {
+                color: $brand-color;
+              }
+            }
+          }
+        }
       }
     }
   }
