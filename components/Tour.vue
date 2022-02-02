@@ -50,7 +50,7 @@
               </div>
             </div>
           </div>
-          <div class="text-justify serif-fonts mb-4" v-html="tour.overview"></div>
+          <!-- <div class="text-justify serif-fonts mb-4" v-html="tour.overview"></div> -->
           <div v-for="(day, i) in tour.days" :key="day.id" class="mb-4">
             <div class="card days">
               <h4 class="card-header">
@@ -76,6 +76,25 @@
                 <div v-else class="col-lg-12 p-1">
                   <img :src="`${baseURL}/storage/tour_day_photos/${day.photo1 || day.photo2}`" class="img-fluid" :alt="day.title">
                 </div>
+              </div>
+            </div>
+          </div>
+
+          <div v-if="tour.information" class="card mb-3">
+            <h4 class="thin-fonts card-header">Additional Tour Information</h4>
+            <div class="card-body" v-html="tour.information"></div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 mb-3">
+              <div class="card text-white bg-success">
+                <h3 class="thin-fonts card-header">Tour Includes</h3>
+                <div class="card-body" v-html="tour.includes"></div>
+              </div>
+            </div>
+            <div class="col-lg-6 mb-3">
+              <div class="card text-white bg-danger">
+                <h3 class="thin-fonts card-header">Tour Excludes</h3>
+                <div class="card-body" v-html="tour.excludes"></div>
               </div>
             </div>
           </div>
@@ -127,7 +146,7 @@ export default {
           name: 'description',
           content: this.tour.meta_description
             ? this.tour.meta_description
-            : this.tour.overview.substr(1, 160)
+            : ''
         }
       ]
     }

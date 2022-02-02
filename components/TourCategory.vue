@@ -23,15 +23,15 @@
                 <div class="card-body p-0">
                   <NuxtLink :to="`/tour/${tour.slug}`">
                     <img 
-                      :src="`${baseURL}/storage/tour_header_photos/${tour.header_photo}`"
+                      :src="`${baseURL}/storage/tour_feature_photos/${tour.feature_photo}`"
                       :title="`${tour.days.length} days ${tour.name}`"
                       class="img-fluid" :alt="tour.name"
                     >
                   </NuxtLink>
                 </div>
-                <div class="card-body">
+                <!-- <div class="card-body">
                   <div class="text-justify text-black-50" v-html="tour.overview"></div>
-                </div>
+                </div> -->
                 <h5 class="card-footer mb-0">
                   <NuxtLink :to="`/tour/${tour.slug}`" 
                     :title="`${tour.days.length} days ${tour.name}`"
@@ -76,10 +76,15 @@
                 v-for="category in categoriesWithoutCurrentCategory"
                 :to="`/safari-tours/${category.slug}`"
                 class="list-inline-item mr-4 text-black-50"
-                :title="`${category.tours.length ? category.tours.length + ' tours' : '' }`"
+                :title="category.name"
                 :key="category.id"
               >
-                {{ category.name }}
+                {{ category.name }} 
+                {{ category.tours.length 
+                  ? (category.tours.length > 1 
+                    ? ` - ( ${category.tours.length} tours )` 
+                    : ` - ( ${category.tours.length} tour )`) 
+                  : '' }}
               </NuxtLink>
             </ul>
           </div>
