@@ -40,6 +40,9 @@
                   :alt="fTour.name"
                 >
                 <div class="overlay"></div>
+                <div class="details">
+                  <span class="days thin-fonts">{{ fTour.days.length }} Days</span>
+                </div>
                 <div class="featured-tour-title">
                   <h3 class="thin-fonts text-white mb-0 text-truncate">{{ fTour.name }}</h3>
                 </div>
@@ -73,8 +76,14 @@
                   </span>
                 </NuxtLink>
               </h4>
-              
+              <div 
+                v-html="`${hTourCategory.description.length > 150 
+                ? hTourCategory.description.substr(0,150)+'...' 
+                : hTourCategory.description}`" 
+                class="mt-2 text-justify"
+              ></div>
             </div>
+
           </div>
         </div>
       </div>
@@ -108,13 +117,14 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { sortBy } from 'lodash';
 
 export default {
   computed: {
     ...mapGetters(['baseURL','tourCategories', 'pages','tours','destinations']),
     about() { return this.pages.find(p => p.slug.includes('about')) },
     featuredTours() { return this.tours.filter(t => +t.featured === 1) },
-    limitedTourCategories() {  return [...(this.tourCategories.filter(c => c.tours.length > 0))].splice(0,3); },
+    limitedTourCategories() {  return [...(sortBy(this.tourCategories.filter(c => c.tours.length > 0), ['tours']))].splice(0,3); },
     limitedDestinations() { let lDs = [...this.destinations]; return lDs.splice(0,6) }
   },
 }
@@ -132,6 +142,14 @@ export default {
           position: absolute;
           left: 0; top: 0; width: 100%; height: 100%;
           background: linear-gradient(transparent 7%, rgba(black, 1));
+        }
+
+        .details {
+          position: absolute;
+          bottom: 6%;
+          left: 5%;
+          font-size: 10rem;
+          color: transparentize(#fff, .9);
         }
 
         .featured-tour-title {
