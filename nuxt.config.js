@@ -49,7 +49,20 @@ export default {
   axios: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    publicPath: ''
+  },
+  generate: {
+    ignore: [
+      '.nuxt', // buildDir
+      'static', // dir.static
+      'dist', // generate.dir
+      'node_modules',
+      '.**/*',
+      '.*',
+      'README.md'
+    ]
+  },
   // loading progress bar
   loading: {
     padding: '10px',
