@@ -20,7 +20,7 @@
           <div class="logo-container">
             <NuxtLink to="/" class="logo">
               <img 
-                src="http://safaris-backend.run/storage/generic_photos/logo-white-transparent.png" 
+                :src="`${baseURL}/storage/generic_photos/logo-white-transparent.png`" 
                 class="img-fluid" alt=""
               >
             </NuxtLink>
@@ -115,7 +115,7 @@ import { mapGetters } from 'vuex';
 export default {
   computed: {
     ...mapGetters([
-      'pages','tourCategories','destinations'
+      'pages','tourCategories','destinations', 'baseURL'
     ])
   },
   async fetch() {

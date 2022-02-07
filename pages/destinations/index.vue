@@ -14,10 +14,8 @@
                   >
                 </NuxtLink>
               </div>
-              <div class="card-body text-justify" 
-                v-html="destination.description.length > 130 
-                ? destination.description.substr(0, 130) + '...' 
-                : destination.description"
+              <div class="card-body text-justify multiline-ellipsis"
+                v-html="destination.description.length > 130 ? `${destination.description.slice(0, 130)}...` : destination.description"
               >
               </div>
               <div class="card-footer">
@@ -51,7 +49,7 @@ export default {
     ...mapGetters([
       'apiURL',
       'baseURL'
-    ])
-  },
+    ]),
+  }
 }
 </script>
