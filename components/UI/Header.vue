@@ -308,7 +308,7 @@ export default {
           padding: 0;
           margin: 0;
           list-style: none;
-          justify-content: start;
+          justify-content: flex-start;
           align-items: flex-start;
           background: linear-gradient(lighten($orange-color, 0), darken($orange-color, 20));
           border-radius: 8px;

@@ -53,15 +53,7 @@ export default {
     publicPath: ''
   },
   generate: {
-    ignore: [
-      '.nuxt', // buildDir
-      'static', // dir.static
-      'dist', // generate.dir
-      'node_modules',
-      '.**/*',
-      '.*',
-      'README.md'
-    ]
+    // 
   },
   // loading progress bar
   loading: {
