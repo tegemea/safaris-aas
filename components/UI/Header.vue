@@ -3,8 +3,10 @@
     <div class="topbar">
       <div class="container">
         <div class="row">
-          <div class="col-md-6">Welcome to Animal Action Safaris, where you see African Animals in Action..!</div>
-          <div class="col-md-6 text-right">
+          <div class="col-12 text-center text-lg-left col-lg-6">
+            Welcome to Animal Action Safaris, where you see African Animals in Action..!
+          </div>
+          <div class="d-none d-lg-block col-lg-6 text-right">
             <NuxtLink to="/about-us/about-us">About us</NuxtLink>
             <!-- <NuxtLink to="#">Partners & Affilications</NuxtLink> -->
             <NuxtLink to="/blog">Blog</NuxtLink>
@@ -33,14 +35,14 @@
                 <a href="mailto:info@aasafaris.com">Send us Email</a>
               </span>
             </span>
-            <span class="address ml-2 px-4">
+            <span class="address d-none d-lg-flex ml-2 px-4">
               <fai :icon="['far','building']" class="address-icon fa-3x mr-3" />
               <span>
                 <span class="thin-fonts location">Office at Olorien, Moshono</span> <br>
                 <span>Arusha Tanzania</span>
               </span>
             </span>
-            <span class="socials pl-4">
+            <span class="socials d-none d-md-flex pl-4">
               <a href="#" target="_blank" title="Follow us on Facebook">
                 <fai :icon="['fab', 'facebook']" class="fa-2x text-warning" />
               </a>
@@ -186,71 +188,142 @@ export default {
   }
 }
 
-.brand {
-  padding: 4px 0;
-  background: $brand-color;
-  color: white;
+// styles for larger screen
+@media only screen and (min-width: 768px) {
+  .brand {
+    padding: 4px 0;
+    background: $brand-color;
+    color: white;
 
-  .container {
-    .row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      .logo-container {
-        max-width: 300px;
-
-        .logo-container {
-          img.logo {
-            max-height: 10px;
-            border: 1px solid red;
-          }
-        }
-      }
-      .contacts-container {
+    .container {
+      .row {
         display: flex;
+        justify-content: space-between;
         align-items: center;
 
-        a {
-          color: rgb(253, 186, 61);
-        }
+        .logo-container {
+          max-width: 300px;
 
-        .contacts {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          border-right: 1px dashed rgba($color: orange, $alpha: .3);
-
-          .contact-icon {
-            color: rgba($color: orange, $alpha: .3);
-            text-shadow: 0 1px 3px #000;
-          }
-
-          .phone-number {
-            font-size: 22px;
-            // font-weight: bold;
+          .logo-container {
+            img.logo {
+              max-height: 10px;
+              border: 1px solid red;
+            }
           }
         }
-        .address {
+        .contacts-container {
           display: flex;
-          justify-content: space-between;
           align-items: center;
-          border-right: 1px dashed rgba($color: orange, $alpha: .3);
 
-          .address-icon {
-            color: rgba($color: orange, $alpha: .3);
-            text-shadow: 0 1px 3px #000;
+          a {
+            color: rgb(253, 186, 61);
           }
 
-          .location {
-            font-size: 22px;
-            // font-weight: bold;
+          .contacts {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-right: 1px dashed rgba($color: orange, $alpha: .3);
+
+            .contact-icon {
+              color: rgba($color: orange, $alpha: .3);
+              text-shadow: 0 1px 3px #000;
+            }
+
+            .phone-number {
+              font-size: 22px;
+              // font-weight: bold;
+            }
+          }
+          .address {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-right: 1px dashed rgba($color: orange, $alpha: .3);
+
+            .address-icon {
+              color: rgba($color: orange, $alpha: .3);
+              text-shadow: 0 1px 3px #000;
+            }
+
+            .location {
+              font-size: 22px;
+              // font-weight: bold;
+            }
           }
         }
       }
     }
   }
+}
 
+// styles for smaller screen
+@media only screen and (max-width: 767px) {
+  .brand {
+    padding: 4px 0;
+    background: $brand-color;
+    color: white;
+
+    .container {
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .logo-container {
+          max-width: 150px;
+
+          .logo-container {
+            img.logo {
+              max-height: 10px;
+              border: 1px solid red;
+            }
+          }
+        }
+        .contacts-container {
+          display: flex;
+          align-items: center;
+
+          a {
+            color: rgb(253, 186, 61);
+          }
+
+          .contacts {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-right: 1px dashed rgba($color: orange, $alpha: .3);
+
+            .contact-icon {
+              color: rgba($color: orange, $alpha: .3);
+              text-shadow: 0 1px 3px #000;
+            }
+
+            .phone-number {
+              font-size: 22px;
+              // font-weight: bold;
+            }
+          }
+          .address {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-right: 1px dashed rgba($color: orange, $alpha: .3);
+
+            .address-icon {
+              color: rgba($color: orange, $alpha: .3);
+              text-shadow: 0 1px 3px #000;
+            }
+
+            .location {
+              font-size: 22px;
+              // font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 .menu {
