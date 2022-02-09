@@ -202,7 +202,7 @@ export default {
         align-items: center;
 
         .logo-container {
-          max-width: 300px;
+          max-width: 200px;
 
           .logo-container {
             img.logo {
@@ -326,90 +326,293 @@ export default {
   }
 }
 
-.menu {
+// for larger screens
+@media screen and (min-width: 992px) {
+  .menu {
     ul {
-    display: flex;
-    position: relative;
-    top: -25px;
-    height: 50px;
-    z-index: 100;
-    justify-content: center;
-    background: linear-gradient(lighten($brand-color, 15), darken($brand-color, 15));
-    border-radius: 8px;
-    box-shadow: 0 1px 3px 0 #000;
-
-    li {
-      padding: 0;
-      margin: 0;
+      display: flex;
       position: relative;
+      top: -25px;
+      height: 50px;
+      z-index: 100;
+      justify-content: center;
+      background: linear-gradient(lighten($brand-color, 15), darken($brand-color, 15));
+      border-radius: 8px;
+      box-shadow: 0 1px 3px 0 #000;
 
-      &:hover {
-        .dropdown {
-          display: flex;
-        }
-      }
-
-      a {
-        display: block;
-        padding: 7px 15px;
-        color: white;
-        text-decoration: none;
-        margin: 5px 5px;
-        border-radius: 8px;
-        border: 1px dashed rgba($color: $brand-color, $alpha: .1);
-        transition: all .3s ease;
+      li {
+        padding: 0;
+        margin: 0;
+        position: relative;
 
         &:hover {
-          border: 1px dashed $orange-color;
+          .dropdown {
+            display: flex;
+          }
+        }
+
+        a {
+          display: block;
+          padding: 7px 15px;
+          color: white;
+          text-decoration: none;
+          margin: 5px 5px;
+          border-radius: 8px;
+          border: 1px dashed rgba($color: $brand-color, $alpha: .1);
+          transition: all .3s ease;
+
+          &:hover {
+            border: 1px dashed $orange-color;
+          }
+        }
+
+        .dropdown {
+          position: absolute;
+          display: none;
+          left: 0; top: 50px;
+          padding: 10px 0;
+          // border: 2px solid red;
+
+          ul.dropdown-ul {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            top: 0;
+            height: 100%;
+            z-index: 100;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            justify-content: flex-start;
+            align-items: flex-start;
+            background: linear-gradient(lighten($orange-color, 0), darken($orange-color, 20));
+            border-radius: 8px;
+            box-shadow: 0 1px 3px 0 #000;
+            font-family: $thin-fonts;
+            font-size: 1.1rem;
+            // border: 2px solid green;
+
+            li {
+              border-bottom: 1px dashed transparentize($color: #fff, $amount: .6);
+              width: 100%;
+
+              &:last-child {
+                border-bottom: none;
+              }
+              
+              a {
+                padding: 9px 20px 7px 20px;
+                color: white;
+                text-decoration: none;
+                margin: 0;
+                border-radius: 0;
+                white-space: nowrap;
+                border: none;
+                transition: all .3s ease;
+
+                &:hover {
+                  color: $brand-color;
+                }
+              }
+            }
+          }
         }
       }
+    }
+  }
+}
 
-      .dropdown {
-        position: absolute;
-        display: none;
-        left: 0; top: 50px;
-        padding: 10px 0;
-        // border: 2px solid red;
+// for medium screens
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .menu {
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 100;
+    top: 0 !important;
+    
+    ul {
+      display: flex;  
+      height: 50px;
+      justify-content: center;
+      background: lighten($brand-color, 15);
+      border-radius: 0 0 8px 8px;
+      font-family: $thin-fonts;
+      box-shadow: 0 2px 3px 0 #000;
 
-        ul.dropdown-ul {
-          display: flex;
-          flex-direction: column;
-          position: relative;
-          top: 0;
-          height: 100%;
-          z-index: 100;
-          padding: 0;
-          margin: 0;
-          list-style: none;
-          justify-content: flex-start;
-          align-items: flex-start;
-          background: linear-gradient(lighten($orange-color, 0), darken($orange-color, 20));
+      li {
+        padding: 0;
+        margin: 0;
+        position: relative;
+
+        &:hover {
+          .dropdown {
+            display: flex;
+          }
+        }
+
+        a {
+          display: block;
+          padding: 7px 15px;
+          color: white;
+          text-decoration: none;
+          margin: 5px 5px;
           border-radius: 8px;
-          box-shadow: 0 1px 3px 0 #000;
-          font-family: $thin-fonts;
-          font-size: 1.1rem;
-          // border: 2px solid green;
+          border: 1px dashed rgba($color: $brand-color, $alpha: .1);
+          transition: all .3s ease;
 
-          li {
-            border-bottom: 1px dashed transparentize($color: #fff, $amount: .6);
-            width: 100%;
+          &:hover {
+            border: 1px dashed $orange-color;
+          }
+        }
 
-            &:last-child {
-              border-bottom: none;
+        .dropdown {
+          position: absolute;
+          display: none;
+          left: 0; top: 50px;
+          padding: 10px 0;
+          // border: 2px solid red;
+
+          ul.dropdown-ul {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            top: 0;
+            height: 100%;
+            z-index: 100;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            justify-content: flex-start;
+            align-items: flex-start;
+            background: linear-gradient(lighten($orange-color, 0), darken($orange-color, 20));
+            border-radius: 8px;
+            box-shadow: 0 1px 3px 0 #000;
+            font-family: $thin-fonts;
+            font-size: 1.1rem;
+            // border: 2px solid green;
+
+            li {
+              border-bottom: 1px dashed transparentize($color: #fff, $amount: .6);
+              width: 100%;
+
+              &:last-child {
+                border-bottom: none;
+              }
+              
+              a {
+                padding: 9px 20px 7px 20px;
+                color: white;
+                text-decoration: none;
+                margin: 0;
+                border-radius: 0;
+                white-space: nowrap;
+                border: none;
+                transition: all .3s ease;
+
+                &:hover {
+                  color: $brand-color;
+                }
+              }
             }
-             
-             a {
-              padding: 9px 20px 7px 20px;
-              color: white;
-              text-decoration: none;
-              margin: 0;
-              border-radius: 0;
-              white-space: nowrap;
-              border: none;
-              transition: all .3s ease;
+          }
+        }
+      }
+    }
+  }
+}
 
-              &:hover {
-                color: $brand-color;
+// for smaller screens
+@media screen and (max-width: 767px) {
+  .menu {
+    ul {
+      display: block;
+      position: absolute;
+      top: 0;
+      // height: 50px;
+      width: 100%;
+      z-index: 100;
+      justify-content: center;
+      background: lighten($brand-color, 15);
+      border-radius: 0;
+      font-family: $thin-fonts;
+      // box-shadow: 0 1px 3px 0 #000;
+
+      li {
+        padding: 0;
+        margin: 0;
+        position: relative;
+
+        &:hover {
+          .dropdown {
+            // display: flex;
+          }
+        }
+
+        a {
+          display: block;
+          padding: 7px 15px;
+          color: white;
+          text-decoration: none;
+          margin: 5px 5px;
+          border-radius: 8px;
+          border: 1px dashed rgba($color: $brand-color, $alpha: .1);
+          transition: all .3s ease;
+
+          &:hover {
+            border: 1px dashed $orange-color;
+          }
+        }
+
+        .dropdown {
+          position: relative;
+          display: none;
+          // display: none;
+          // left: 0; top: 50px;
+          // padding: 10px 0;
+          // margin: 0 15px;
+          // border: 2px solid red;
+
+          ul.dropdown-ul {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            top: 0;
+            height: 100%;
+            z-index: 100;
+            padding: 0;
+            width: 92%;
+            margin: 0 4%;
+            list-style: none;
+            justify-content: flex-start;
+            align-items: flex-start;
+            background: linear-gradient(lighten($orange-color, 0), darken($orange-color, 20));
+            border-radius: 8px;
+            box-shadow: 0 1px 3px 0 #000;
+            font-family: $thin-fonts;
+            font-size: 1.1rem;
+            // border: 2px solid green;
+
+            li {
+              border-bottom: 1px dashed transparentize($color: #fff, $amount: .6);
+              width: 100%;
+
+              &:last-child {
+                border-bottom: none;
+              }
+              
+              a {
+                padding: 9px 20px 7px 20px;
+                color: white;
+                text-decoration: none;
+                margin: 0;
+                border-radius: 0;
+                white-space: nowrap;
+                border: none;
+                transition: all .3s ease;
+
+                &:hover {
+                  color: $brand-color;
+                }
               }
             }
           }

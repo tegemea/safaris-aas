@@ -2,7 +2,7 @@
   <div class="footer">
     <div class="container">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-6 col-lg-3 mb-3">
           <!-- <h4 class="thin-fonts">About us</h4>
           <div class="text-justify" v-if="aboutUsPage" 
             v-html="aboutUsPage.description.length > 140 
@@ -25,7 +25,7 @@
             {{ fPage.name }}
           </NuxtLink>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-6 col-lg-3 mb-3">
           <h4 class="thin-fonts">Tanzania Safari Tours</h4>
           <NuxtLink
             v-for="fTourCategory in tourCategoriesWithTours"
@@ -37,7 +37,7 @@
             {{ fTourCategory.name }} ({{ fTourCategory.tours.length }} {{ fTourCategory.tours.length > 1 ? 'tours' : 'tour' }})
           </NuxtLink>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-6 col-lg-3 mb-3">
           <h4 class="thin-fonts">Safari Destinations</h4>
           <NuxtLink 
             v-for="fDestination in destinations"
@@ -50,13 +50,15 @@
           {{ fDestination.name }}
           </NuxtLink>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-6 col-lg-3 mb-3">
           <h4 class="thin-fonts">Find & Contact us</h4>
         </div>
         <div class="col-12 bottom-bar">
-          <div class="row">
-            <div class="col">&copy; {{ new Date().getFullYear() }} footer..!</div>
-            <div class="col">Developed by <a href="https://luso.solutions" target="_blank">LUSO Solutions</a></div>
+          <div class="row text-center text-md-left">
+            <div class="col-md-8">&copy; {{ new Date().getFullYear() }} Animal Action Safaris. All Rights Reserved</div>
+            <div class="col-md-4 text-md-right poweredby">
+              Developed by <a href="https://luso.solutions" target="_blank" title="LUSO Solutions">LUSO Solutions</a>
+            </div>
           </div>
         </div>
       </div>
@@ -122,7 +124,24 @@ export default {
       padding-top: 15px;
       margin-top: 15px;
       padding-bottom: 15px;
+      font-family: $thin-fonts;
+      color: lighten($color: $brand-color, $amount: 15);
       border-top: 1px dashed lighten($color: $brand-color, $amount: 15);
+
+      .poweredby {
+        // color: lighten($color: $brand-color, $amount: 30);
+
+        a {
+          color: lighten($color: $brand-color, $amount: 30);
+          transition: all .3s ease;
+          text-decoration: none;
+          font-weight: bold;
+
+          &:hover {
+            color: lighten($color: $brand-color, $amount: 50);
+          }
+        }
+      }
     }
   }
 }
