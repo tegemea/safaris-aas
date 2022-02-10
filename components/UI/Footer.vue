@@ -2,7 +2,7 @@
   <div class="footer">
     <div class="container">
       <div class="row">
-        <div class="col-md-6 col-lg-3 mb-3">
+        <div v-if="pages.length" class="col-md-6 col-lg-3 mb-3">
           <!-- <h4 class="thin-fonts">About us</h4>
           <div class="text-justify" v-if="aboutUsPage" 
             v-html="aboutUsPage.description.length > 140 
@@ -25,7 +25,7 @@
             {{ fPage.name }}
           </NuxtLink>
         </div>
-        <div class="col-md-6 col-lg-3 mb-3">
+        <div v-if="tourCategoriesWithTours.length" class="col-md-6 col-lg-3 mb-3">
           <h4 class="thin-fonts">Tanzania Safari Tours</h4>
           <NuxtLink
             v-for="fTourCategory in tourCategoriesWithTours"
@@ -37,7 +37,7 @@
             {{ fTourCategory.name }} ({{ fTourCategory.tours.length }} {{ fTourCategory.tours.length > 1 ? 'tours' : 'tour' }})
           </NuxtLink>
         </div>
-        <div class="col-md-6 col-lg-3 mb-3">
+        <div v-if="destinations.length" class="col-md-6 col-lg-3 mb-3">
           <h4 class="thin-fonts">Safari Destinations</h4>
           <NuxtLink 
             v-for="fDestination in destinations"
@@ -52,6 +52,13 @@
         </div>
         <div class="col-md-6 col-lg-3 mb-3">
           <h4 class="thin-fonts">Find & Contact us</h4>
+          <address class="footer-address">
+            <h3>Animal Action Safari</h3>
+            U.S.A. : <a href="mailto:moorborn@gmail.com">moorborn(at)gmail.com</a> <br>
+            France : <a href="mailto:yannick_goujaud@yahoo.fr">yannick_goujaud(at)yahoo.fr</a> <br>
+            Tanzania : <a href="mailto:info@aasafari.com">info(at)aasafari.com</a> <br>
+            Phone( TZ ) : <a href="tel:+255 784 268066">+255 784 268066</a>
+          </address>
         </div>
         <div class="col-12 bottom-bar">
           <div class="row text-center text-md-left">
@@ -142,6 +149,14 @@ export default {
           }
         }
       }
+    }
+  }
+  .footer-address {
+    color: lighten($brand-color, 30);
+    font-family: $thin-fonts;
+
+    a {
+      color: lighten($brand-color, 15) !important;
     }
   }
 }

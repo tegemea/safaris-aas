@@ -8,13 +8,22 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  async asyncData({ store, $axios, params }) {
-    const { data } = await $axios.get(`${store.getters.apiURL}/pages`);
-    const page = data.find(p => p.slug === params.slug);
-    return { page, pages: data }
+  async asyncData({ $axios, store, params }) {
+    if(store.getters.pages.length) {
+      const page = store.getters.pages.find(p => p.slug === params.slug)
+      return { pages: store.getters.pages, page }
+    } else {
+      const { data } = await $axios.get(`${store.getters.apiURL}/pages`);
+      const page = data.find(p => p.slug === params.slug)
+      return { pages: data, page }
+    }
   },
   computed: {
-    ...mapGetters(['baseURL'])
+    ...mapGetters(['baseURL']),
+    // page: function() {
+    //   let slug = this.$route.params.slug;
+    //   return this.pages.find(p => p.slug === slug);
+    // }
   }
 }
 </script>

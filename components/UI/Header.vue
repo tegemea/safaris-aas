@@ -10,8 +10,8 @@
             <NuxtLink to="/about-us/about-us">About us</NuxtLink>
             <!-- <NuxtLink to="#">Partners & Affilications</NuxtLink> -->
             <!-- <NuxtLink to="/blog">Blog</NuxtLink> -->
-            <NuxtLink to="#">Contact us</NuxtLink>
-            <NuxtLink to="#">Book a Trip</NuxtLink>
+            <NuxtLink to="/contact-us">Contact us</NuxtLink>
+            <!-- <NuxtLink to="#">Book a Trip</NuxtLink> -->
           </div>
         </div>
       </div>
@@ -61,7 +61,7 @@
       </div>
     </div>
     
-    <!-- Main Navigation -->
+    <!-- Main Navigation - Desktop-->
     <div class="menu d-none d-md-flex" id="menu">
       <div class="container">
         <div class="row">
@@ -110,14 +110,15 @@
                 </transition>
               </li>
               <!-- <li><NuxtLink to="/blog">Blog</NuxtLink></li> -->
-              <li><NuxtLink to="#">Contact us</NuxtLink></li>
-              <li><NuxtLink to="/bookings">Bookings</NuxtLink></li>
+              <li><NuxtLink to="/contact-us">Contact us</NuxtLink></li>
+              <!-- <li><NuxtLink to="/bookings">Bookings</NuxtLink></li> -->
             </ul>
           </div>
         </div>
       </div>
     </div>
     
+    <!-- Main Navigation - Mobile -->
     <div v-if="showMobileMenu" class="menu" id="menu">
       <div class="container">
         <div class="row">
@@ -167,7 +168,7 @@
               </li>
               <!-- <li><NuxtLink to="/blog">Blog</NuxtLink></li> -->
               <li><NuxtLink to="#">Contact us</NuxtLink></li>
-              <li><NuxtLink to="/bookings">Bookings</NuxtLink></li>
+              <!-- <li><NuxtLink to="/bookings">Bookings</NuxtLink></li> -->
             </ul>
           </div>
         </div>
