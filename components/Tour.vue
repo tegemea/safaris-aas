@@ -101,7 +101,7 @@
         </div>
         
         <!-- Tour sidebar -->
-        <div class="col-lg-4">
+        <div class="col-lg-4 mb-3">
           <div class="sticky">
             <MinSafariBookingForm :tour="tour" />
             <div v-if="tour.days.length > 1" class="mb-3">
