@@ -55,7 +55,7 @@
       <!-- tour categories -->
       <div class="row tour-categories mt-5">
         <div class="col-12 mb-3">
-          <h2 class="section-title text-center brand-color thin-fonts"><span>Tanzania Safari Experiences we Offer</span></h2>
+          <h2 class="section-title text-center brand-color thin-fonts"><span>Tanzania Experiences we Offer</span></h2>
         </div>
         <div v-for="hTourCategory in limitedTourCategories" class="col-md-4 mb-3" :key="hTourCategory.id">
           <div class="card">
