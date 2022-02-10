@@ -29,19 +29,19 @@
             <div class="col-12 mb-3">
               <div class="card">
                 <div class="card-body">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div>
+                  <div class="d-flex justify-content-between align-items-center flex-column flex-lg-row">
+                    <div class="text-center text-lg-left mb-3">
                       <ul class="list-unstyled text-black-50">
                         <h5 v-for="c in tour.categories" :key="c.id"><fai :icon="['fas','angle-right']" class="mr-2"></fai>{{ c.name }}</h5>
                       </ul>
                     </div>
-                    <div class="text-center">
+                    <div class="text-center mb-3">
                       <img :src="`${baseURL}/storage/country_flags/${tour.country.flag}`" alt="" style="max-width: 70px; border-radius: 8px">
                       <h4 class="thin-fonts mt-3">
                         {{ tour.days.length }} {{ tour.days.length > 1 ? 'Days' : 'Day' }} {{ tour.country.name }} Safari
                       </h4>
                     </div>
-                    <div v-if="tour.price" class="text-center">
+                    <div v-if="tour.price" class="text-center mb-3">
                       <span class="serif-fonts text-black-50">from only</span> <br>
                       <span class="tour-price thin-fonts">US$ {{ numberWithCommas(Math.floor(tour.price)) }}</span>
                     </div>

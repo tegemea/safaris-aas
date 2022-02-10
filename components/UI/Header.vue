@@ -9,7 +9,7 @@
           <div class="d-none d-lg-block col-lg-6 text-right">
             <NuxtLink to="/about-us/about-us">About us</NuxtLink>
             <!-- <NuxtLink to="#">Partners & Affilications</NuxtLink> -->
-            <NuxtLink to="/blog">Blog</NuxtLink>
+            <!-- <NuxtLink to="/blog">Blog</NuxtLink> -->
             <NuxtLink to="#">Contact us</NuxtLink>
             <NuxtLink to="#">Book a Trip</NuxtLink>
           </div>
@@ -28,7 +28,7 @@
             </NuxtLink>
           </div>
           <div class="contacts-container">
-            <span class="contacts pr-4">
+            <span class="contacts pr-4 d-none d-md-flex">
               <fai icon="headset" class="contact-icon fa-3x mr-3" />
               <span>
                 <a href="tel:+255784268066" class="thin-fonts phone-number">+255 784 268066</a> <br>
@@ -53,54 +53,119 @@
                 <fai :icon="['fab', 'skype']" class="fa-2x ml-3 text-warning" />
               </a>
             </span>
+            <button class="d-md-none btn" @click.prevent="toggleMenu">
+              <fai :icon="['fas','bars']" class="fa-2x text-warning"></fai>
+            </button>
           </div>
         </div>
       </div>
     </div>
     
     <!-- Main Navigation -->
-    <div class="menu" id="menu">
+    <div class="menu d-none d-md-flex" id="menu">
       <div class="container">
         <div class="row">
           <div class="col-12 p-0">
             <ul class="list-unstyled text-uppercase">
               <li><NuxtLink to="/">Home</NuxtLink></li>
-              <li>
+              <li @click.prevent="showDropDowns.tourCategories = !showDropDowns.tourCategories">
                 <NuxtLink to="/safari-tours">Safaris & Tours</NuxtLink>
-                <span class="dropdown">
-                  <ul class="dropdown-ul">
-                    <li v-for="hTourCategory in tourCategories" :key="hTourCategory.id">
-                      <NuxtLink :to="`/safari-tours/${hTourCategory.slug}`" class="d-flex justify-content-between align-items-center">
-                        {{ hTourCategory.name }} 
-                        <span v-if="hTourCategory.tours.length" 
-                          class="badge badge-pill ml-3 badge-dark">{{ hTourCategory.tours.length }}
-                        </span>
-                      </NuxtLink>
-                    </li>
-                  </ul>
-                </span>
+                <transition name="slide">
+                  <span class="dropdown">
+                    <ul class="dropdown-ul">
+                      <li v-for="hTourCategory in tourCategories" :key="hTourCategory.id">
+                        <NuxtLink :to="`/safari-tours/${hTourCategory.slug}`" class="d-flex justify-content-between align-items-center">
+                          {{ hTourCategory.name }} 
+                          <span v-if="hTourCategory.tours.length" 
+                            class="badge badge-pill ml-3 badge-dark">{{ hTourCategory.tours.length }}
+                          </span>
+                        </NuxtLink>
+                      </li>
+                    </ul>
+                  </span>
+                </transition>
               </li>
-              <li>
+              <li @click.prevent="showDropDowns.destinations = !showDropDowns.destinations">
                 <NuxtLink to="/destinations">Safari Destinations</NuxtLink>
-                <span class="dropdown">
-                  <ul class="dropdown-ul">
-                    <li v-for="hDestination in destinations" :key="hDestination.id">
-                      <NuxtLink :to="`/destinations/${hDestination.slug}`">{{ hDestination.name }}</NuxtLink>
-                    </li>
-                  </ul>
-                </span>
+                <transition name="slide">
+                  <span class="dropdown">
+                    <ul class="dropdown-ul">
+                      <li v-for="hDestination in destinations" :key="hDestination.id">
+                        <NuxtLink :to="`/destinations/${hDestination.slug}`">{{ hDestination.name }}</NuxtLink>
+                      </li>
+                    </ul>
+                  </span>
+                </transition>
               </li>
-              <li>
-                <NuxtLink to="#">About us</NuxtLink>
-                <span class="dropdown">
-                  <ul class="dropdown-ul">
-                    <li v-for="hPage in pages" :key="hPage.id">
-                      <NuxtLink :to="`/about-us/${hPage.slug}`">{{ hPage.name }}</NuxtLink>
-                    </li>
-                  </ul>
-                </span>
+              <li @click.prevent="showDropDowns.pages = !showDropDowns.pages">
+                <NuxtLink to="/about-us/about-us">About us</NuxtLink>
+                <transition name="slide">
+                  <span class="dropdown">
+                    <ul class="dropdown-ul">
+                      <li v-for="hPage in pages" :key="hPage.id">
+                        <NuxtLink :to="`/about-us/${hPage.slug}`">{{ hPage.name }}</NuxtLink>
+                      </li>
+                    </ul>
+                  </span>
+                </transition>
               </li>
-              <li><NuxtLink to="/blog">Blog</NuxtLink></li>
+              <!-- <li><NuxtLink to="/blog">Blog</NuxtLink></li> -->
+              <li><NuxtLink to="#">Contact us</NuxtLink></li>
+              <li><NuxtLink to="/bookings">Bookings</NuxtLink></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div v-if="mobileMenu" class="menu" id="menu">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 p-0">
+            <ul class="list-unstyled text-uppercase">
+              <li><NuxtLink to="/">Home</NuxtLink></li>
+              <li @click.prevent="showDropDowns.tourCategories = !showDropDowns.tourCategories">
+                <NuxtLink to="/safari-tours">Safaris & Tours</NuxtLink>
+                <transition name="slide">
+                  <span class="dropdown">
+                    <ul class="dropdown-ul">
+                      <li v-for="hTourCategory in tourCategories" :key="hTourCategory.id">
+                        <NuxtLink :to="`/safari-tours/${hTourCategory.slug}`" class="d-flex justify-content-between align-items-center">
+                          {{ hTourCategory.name }} 
+                          <span v-if="hTourCategory.tours.length" 
+                            class="badge badge-pill ml-3 badge-dark">{{ hTourCategory.tours.length }}
+                          </span>
+                        </NuxtLink>
+                      </li>
+                    </ul>
+                  </span>
+                </transition>
+              </li>
+              <li @click.prevent="showDropDowns.destinations = !showDropDowns.destinations">
+                <NuxtLink to="/destinations">Safari Destinations</NuxtLink>
+                <transition name="slide">
+                  <span class="dropdown">
+                    <ul class="dropdown-ul">
+                      <li v-for="hDestination in destinations" :key="hDestination.id">
+                        <NuxtLink :to="`/destinations/${hDestination.slug}`">{{ hDestination.name }}</NuxtLink>
+                      </li>
+                    </ul>
+                  </span>
+                </transition>
+              </li>
+              <li @click.prevent="showDropDowns.pages = !showDropDowns.pages">
+                <NuxtLink to="/about-us/about-us">About us</NuxtLink>
+                <transition name="slide">
+                  <span class="dropdown">
+                    <ul class="dropdown-ul">
+                      <li v-for="hPage in pages" :key="hPage.id">
+                        <NuxtLink :to="`/about-us/${hPage.slug}`">{{ hPage.name }}</NuxtLink>
+                      </li>
+                    </ul>
+                  </span>
+                </transition>
+              </li>
+              <!-- <li><NuxtLink to="/blog">Blog</NuxtLink></li> -->
               <li><NuxtLink to="#">Contact us</NuxtLink></li>
               <li><NuxtLink to="/bookings">Bookings</NuxtLink></li>
             </ul>
@@ -115,13 +180,25 @@
 import { mapGetters } from 'vuex';
 
 export default {
+  data() {
+    return {
+      mobileMenu: false,
+      showDropDowns: {
+        tourCategories: false,
+        destinations: false,
+        pages: false
+      }
+    }
+  },
   computed: {
     ...mapGetters([
       'pages','tourCategories','destinations', 'baseURL'
     ])
   },
-  async fetch() {
-    // const 
+  methods: {
+    toggleMenu() {
+      this.mobileMenu = !this.mobileMenu;
+    }
   }
 }
 </script>
@@ -263,6 +340,7 @@ export default {
     padding: 4px 0;
     background: $brand-color;
     color: white;
+    z-index: 100;
 
     .container {
       .row {
@@ -524,13 +602,14 @@ export default {
 // for smaller screens
 @media screen and (max-width: 767px) {
   .menu {
+
     ul {
       display: block;
       position: absolute;
       top: 0;
       // height: 50px;
       width: 100%;
-      z-index: 100;
+      z-index: 10;
       justify-content: center;
       background: lighten($brand-color, 15);
       border-radius: 0;
@@ -564,9 +643,10 @@ export default {
         }
 
         .dropdown {
-          position: relative;
+          position: absolute;
+          width: 100%;
+          // display: block;
           display: none;
-          // display: none;
           // left: 0; top: 50px;
           // padding: 10px 0;
           // margin: 0 15px;
@@ -580,8 +660,8 @@ export default {
             height: 100%;
             z-index: 100;
             padding: 0;
-            width: 92%;
-            margin: 0 4%;
+            width: 98%;
+            margin: 0 1%;
             list-style: none;
             justify-content: flex-start;
             align-items: flex-start;
@@ -619,6 +699,47 @@ export default {
         }
       }
     }
+  }
+}
+
+// vue animation effects
+.slide-enter {
+  // 
+}
+.slide-enter-active {
+  animation: slide-in 1s ease forwards;
+}
+.slide-leave {
+  // 
+}
+.slide-leave-active {
+  animation: slide-out 1s ease forwards;
+}
+
+@keyframes slide-in {
+  from {
+    // transform: translateY(-30px);
+    
+    opacity: 0;
+    // height: 0;
+  }
+  to {
+    // transform: translateY(0);
+    opacity: 1;
+    // height: auto;
+  }
+}
+
+@keyframes slide-out {
+  from {
+    // transform: translateY(0);
+    opacity: 1;
+    // height: auto;
+  }
+  to {
+    // transform: translateY(-30px);
+    opacity: 0;
+    // height: 0;
   }
 }
 </style>

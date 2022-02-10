@@ -8,7 +8,7 @@ import { faBuilding } from '@fortawesome/free-regular-svg-icons'
 // import { faHeadset } from '@fortawesome/free-solid-svg-icons'
 import { 
     faSpinner, faPaw, faHeadset, faMapMarkerAlt, faAngleRight, 
-    faPhoneAlt, faUserSecret, faCircleNotch
+    faPhoneAlt, faUserSecret, faCircleNotch, faBars
   } from '@fortawesome/free-solid-svg-icons'
 // import { faPaw } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons'
@@ -28,7 +28,8 @@ library.add(
   faBuilding, 
   faAngleRight,
   faMapMarkerAlt,
-  faCircleNotch
+  faCircleNotch,
+  faBars
 )
 
 Vue.component('fai', FontAwesomeIcon)

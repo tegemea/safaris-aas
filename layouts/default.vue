@@ -5,7 +5,7 @@
     </div>
     <div v-if="tours.length && pages.length && destinations.length && tourCategories.length">
       <div class="container-fluid p-0"><UIHeader /></div>
-      <div class="container-fluid" style="position: relative; top: -65px"><Nuxt keep-alive /></div>
+      <div class="container-fluid main"><Nuxt keep-alive /></div>
       <div class="container-fluid p-0"><UIFooter /></div>
     </div>
   </div>
@@ -67,4 +67,11 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
 } 
+
+@media screen and (min-width: 768px) {
+  .main {
+    position: relative;
+    top: -65px;
+  }
+}
 </style>
