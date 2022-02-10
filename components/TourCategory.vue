@@ -16,7 +16,7 @@
       </div>
       <div v-if="tourCategory.tours.length" class="row">
         <div class="col-lg-12 mb-4 text-justify" v-html="tourCategory.description"></div>
-        <div class="col-lg-8 mb-3">
+        <div class="col-md-7 col-lg-8 mb-3">
           <div class="row">
             <div v-for="tour in tourCategory.tours" class="col-lg-6" :key="tour.id">
               <div class="card mb-3">
@@ -44,7 +44,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-4 mb-3">
+        <div class="col-md-5 col-lg-4 mb-3">
           <div class="card">
             <h3 class="card-header thin-fonts">African Safari Experiences</h3>
             <div class="card-body p-0">
