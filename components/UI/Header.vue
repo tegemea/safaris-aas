@@ -118,7 +118,7 @@
       </div>
     </div>
     
-    <div v-if="mobileMenu" class="menu" id="menu">
+    <div v-if="showMobileMenu" class="menu" id="menu">
       <div class="container">
         <div class="row">
           <div class="col-12 p-0">
@@ -177,12 +177,11 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default {
   data() {
     return {
-      mobileMenu: false,
       showDropDowns: {
         tourCategories: false,
         destinations: false,
@@ -192,12 +191,13 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'pages','tourCategories','destinations', 'baseURL'
+      'pages','tourCategories','destinations', 'baseURL','showMobileMenu'
     ])
   },
   methods: {
+    ...mapMutations(['showMobileMenuView']),
     toggleMenu() {
-      this.mobileMenu = !this.mobileMenu;
+      this.showMobileMenuView();
     }
   }
 }
