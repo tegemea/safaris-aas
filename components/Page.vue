@@ -13,8 +13,8 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-md-8 text-justify" v-html="page.description"></div>
-        <div class="col-md-4 side-bar">
+        <div class="col-md-8 text-justify mb-3" v-html="page.description"></div>
+        <div class="col-md-4 side-bar mb-3">
           <div class="card">
             <h3 class="thin-fonts card-header brand-color">
               <fai :icon="['fas','map-marker-alt']" class="mr-3"></fai>

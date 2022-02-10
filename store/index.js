@@ -31,7 +31,7 @@ export const mutations = {
   storeCountries(state, countries) { state.countries = countries; },
   storeDestinationCategories(state, destinationCategories) { state.destinationCategories = destinationCategories; },
   storeDestinations(state, destinations) { state.destinations = destinations; },
-  showMobileMenuView(state) { state.mobileMenu = true },
+  toggleMobileMenuView(state) { state.mobileMenu = !state.mobileMenu },
   hideMobileMenuView(state) { state.mobileMenu = false }
 }
 

@@ -195,9 +195,9 @@ export default {
     ])
   },
   methods: {
-    ...mapMutations(['showMobileMenuView']),
+    ...mapMutations(['toggleMobileMenuView']),
     toggleMenu() {
-      this.showMobileMenuView();
+      this.toggleMobileMenuView();
     }
   }
 }
