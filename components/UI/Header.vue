@@ -167,7 +167,7 @@
                 </transition>
               </li>
               <!-- <li><NuxtLink to="/blog">Blog</NuxtLink></li> -->
-              <li><NuxtLink to="#">Contact us</NuxtLink></li>
+              <li><NuxtLink to="/contact-us">Contact us</NuxtLink></li>
               <!-- <li><NuxtLink to="/bookings">Bookings</NuxtLink></li> -->
             </ul>
           </div>

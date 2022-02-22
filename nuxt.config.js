@@ -53,9 +53,6 @@ export default {
   build: {
     publicPath: ''
   },
-  generate: {
-    // 
-  },
   // loading progress bar
   loading: {
     padding: '10px',

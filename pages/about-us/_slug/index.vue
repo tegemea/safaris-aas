@@ -20,10 +20,6 @@ export default {
   },
   computed: {
     ...mapGetters(['baseURL']),
-    // page: function() {
-    //   let slug = this.$route.params.slug;
-    //   return this.pages.find(p => p.slug === slug);
-    // }
   }
 }
 </script>

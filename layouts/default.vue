@@ -1,7 +1,9 @@
 <template>
   <div id="layout">
     <div v-if="!tours.length || !pages.length || !destinations.length || !tourCategories.length" class="loading">
-      <fai :icon="['fas','circle-notch']" class="fa-5x fa-spin" style="color: saddlebrown"></fai>
+      <fai :icon="['fas','circle-notch']" class="fa-5x fa-spin mb-5" style="color: saddlebrown" />
+      <h1 class="text-warning">Loading</h1>
+      <p class="text-black-50">Please wait...</p>
     </div>
     <div v-if="tours.length && pages.length && destinations.length && tourCategories.length">
       <div class="container-fluid p-0"><UIHeader /></div>
@@ -58,6 +60,7 @@ export default {
   left: 0; top: 0;
   width: 100%; height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background: radial-gradient(white, rgba(saddlebrown, .3), rgba(saddlebrown, .5));
