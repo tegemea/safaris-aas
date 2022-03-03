@@ -17,32 +17,42 @@
           <div class="card">
             <div class="card-body">
               <div class="row">
-                <div class="col-md-4">
-                  <h3 class="thin-fonts text-black-50">Meet Our Team in U.S.A.</h3><hr>
+                <div class="col-md-3">
+                  <h3 class="thin-fonts text-black-50">Team Member in U.S.A.</h3><hr>
                   <address>
                     Michael Wassenberg <br>
                     1010 Chisolm Trail <br>
                     Goodlettsville, Tenessee 37072 USA <br>
                     Phone: <a href="tel:+1 (703) 217-4890" class="text-black-50">+1 (703) 217-4890</a> <br>
-                    Email: <a href="mailto:moorborn@gmail.com" class="text-black-50">moorborn@gmail.com</a>
+                    Email: <a href="mailto:moorborn@gmail.com" class="text-black-50">moorborn(at)gmail.com</a>
                   </address>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
+                  <h3 class="thin-fonts text-black-50">Team Member in U.S.A.</h3><hr>
+                  <address>
+                    Ibrahim Majid Ambari <br>
+                    9501 Mazzoni Avenue <br>
+                    Lanham Maryland, 20706 USA <br>
+                    Phone: <a href="tel:+1 (202) 868-2214" class="text-black-50">+1 (202) 868-2214</a> <br>
+                    Email: <a href="mailto:ebhra@yahoo.com" class="text-black-50">ebhra(at)yahoo.com</a>
+                  </address>
+                </div>
+                <div class="col-md-3">
                   <h3 class="thin-fonts text-black-50">Meet Our Team in France</h3> <hr>
                   <address>
                     Yannick Goujaud <br>
-                    Palaiseou, France
+                    Palaiseou, France <br>
                     Phone: <a href="tel:+33 66 4997982" class="text-black-50">+33 66 4997982</a> <br>
-                    Email: <a href="mailto:yannick_goujaud@yahoo.fr" class="text-black-50">yannick_goujaud@yahoo.fr</a>
+                    Email: <a href="mailto:yannick_goujaud@yahoo.fr" class="text-black-50">yannick_goujaud(at)yahoo.fr</a>
                   </address>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <h3 class="thin-fonts text-black-50">Meet Our Team in Tanzania</h3> <hr>
                   <address>
                     Leonard Alfayo <br>
                     Arusha, Tanzania <br>
                     Phone: <a href="tel:+255 784 268066" class="text-black-50">+255 784 268 066</a> <br>
-                    Email: <a href="mailto:info@aasafari.com" class="text-black-50">info@aasafari.com</a>
+                    Email: <a href="mailto:info@aasafari.com" class="text-black-50">info(at)aasafari.com</a>
                   </address>
                 </div>
               </div>

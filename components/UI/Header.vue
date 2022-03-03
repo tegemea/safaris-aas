@@ -38,7 +38,7 @@
             <span class="address d-none d-lg-flex ml-2 px-4">
               <fai :icon="['far','building']" class="address-icon fa-3x mr-3" />
               <span>
-                <span class="thin-fonts location">Office at Olorien, Moshono</span> <br>
+                <span class="thin-fonts location">Office at Suye Olorien, Moshono</span> <br>
                 <span>Arusha Tanzania</span>
               </span>
             </span>
