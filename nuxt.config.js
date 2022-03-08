@@ -59,5 +59,8 @@ export default {
     padding: '10px',
     color: 'orange',
     height: '2px'
+  },
+  purgeCSS: {
+    whitelistPatterns: [/svg.*/, /fa.*/]
   }
 }
