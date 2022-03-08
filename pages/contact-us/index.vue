@@ -98,7 +98,11 @@
           </form>
         </div>
         <div class="col-md-4 mb-5">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.8385655932834!2d36.71952841412493!3d-3.3895690424910208!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x18371bd43fc9df6b%3A0xef1461d5748b2be6!2sANIMAL%20ACTION%20SAFARIS!5e0!3m2!1sen!2stz!4v1644503453644!5m2!1sen!2stz" width="100%" height="470" style="border:0;" allowfullscreen="true" loading="lazy"></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.8385655932834!2d36.71952841412493!3d-3.3895690424910208!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x18371bd43fc9df6b%3A0xef1461d5748b2be6!2sANIMAL%20ACTION%20SAFARIS!5e0!3m2!1sen!2stz!4v1644503453644!5m2!1sen!2stz" width="100%" height="400" style="border:0;" allowfullscreen="true" loading="lazy"></iframe>
+          <div class="mt-2">
+            Office at Suye Olorien, Moshono <br>
+            Arusha Tanzania
+          </div>
         </div>
       </div>
     </div>

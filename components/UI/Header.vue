@@ -1,6 +1,6 @@
 <template>
   <div id="header">
-    <div class="topbar">
+    <!-- <div class="topbar">
       <div class="container">
         <div class="row">
           <div class="col-12 text-center text-lg-left col-lg-6">
@@ -8,14 +8,11 @@
           </div>
           <div class="d-none d-lg-block col-lg-6 text-right">
             <NuxtLink to="/about-us/about-us">About us</NuxtLink>
-            <!-- <NuxtLink to="#">Partners & Affilications</NuxtLink> -->
-            <!-- <NuxtLink to="/blog">Blog</NuxtLink> -->
             <NuxtLink to="/contact-us">Contact us</NuxtLink>
-            <!-- <NuxtLink to="#">Book a Trip</NuxtLink> -->
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="brand">
       <div class="container pb-4">
         <div class="row px-2">
@@ -35,19 +32,19 @@
                 <a href="mailto:info@aasafaris.com">Send us Email</a>
               </span>
             </span>
-            <span class="address d-none d-lg-flex ml-2 px-4">
+            <!-- <span class="address d-none d-lg-flex ml-2 px-4">
               <fai :icon="['far','building']" class="address-icon fa-3x mr-3" />
               <span>
                 <span class="thin-fonts location">Office at Suye Olorien, Moshono</span> <br>
                 <span>Arusha Tanzania</span>
               </span>
-            </span>
+            </span> -->
             <span class="socials d-none d-md-flex pl-4">
               <a href="#" target="_blank" title="Follow us on Facebook">
                 <fai :icon="['fab', 'facebook']" class="fa-2x text-warning" />
               </a>
-              <a href="#" target="_blank" title="Follow us on Twitter">
-                <fai :icon="['fab', 'twitter']" class="fa-2x ml-3 text-warning" />
+              <a href="#" target="_blank" title="Follow us on Instagram">
+                <fai :icon="['fab', 'instagram']" class="fa-2x ml-3 text-warning" />
               </a>
               <a href="#" target="_blank" title="Contact us on Skype">
                 <fai :icon="['fab', 'skype']" class="fa-2x ml-3 text-warning" />
@@ -68,6 +65,18 @@
           <div class="col-12 p-0">
             <ul class="list-unstyled text-uppercase">
               <li><NuxtLink to="/">Home</NuxtLink></li>
+              <li @click.prevent="showDropDowns.pages = !showDropDowns.pages">
+                <NuxtLink to="/about-us/about-us">About us</NuxtLink>
+                <transition name="slide">
+                  <span class="dropdown">
+                    <ul class="dropdown-ul">
+                      <li v-for="hPage in pages" :key="hPage.id">
+                        <NuxtLink :to="`/about-us/${hPage.slug}`">{{ hPage.name }}</NuxtLink>
+                      </li>
+                    </ul>
+                  </span>
+                </transition>
+              </li>
               <li @click.prevent="showDropDowns.tourCategories = !showDropDowns.tourCategories">
                 <NuxtLink to="/safari-tours">Safaris & Tours</NuxtLink>
                 <transition name="slide">
@@ -97,21 +106,7 @@
                   </span>
                 </transition>
               </li>
-              <li @click.prevent="showDropDowns.pages = !showDropDowns.pages">
-                <NuxtLink to="/about-us/about-us">About us</NuxtLink>
-                <transition name="slide">
-                  <span class="dropdown">
-                    <ul class="dropdown-ul">
-                      <li v-for="hPage in pages" :key="hPage.id">
-                        <NuxtLink :to="`/about-us/${hPage.slug}`">{{ hPage.name }}</NuxtLink>
-                      </li>
-                    </ul>
-                  </span>
-                </transition>
-              </li>
-              <!-- <li><NuxtLink to="/blog">Blog</NuxtLink></li> -->
               <li><NuxtLink to="/contact-us">Contact us</NuxtLink></li>
-              <!-- <li><NuxtLink to="/bookings">Bookings</NuxtLink></li> -->
             </ul>
           </div>
         </div>
