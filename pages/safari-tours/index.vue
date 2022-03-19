@@ -55,15 +55,13 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  // async asyncData({ store, $axios }) {
-  //   const { data } = await $axios.get(`${store.getters.apiURL}/tour-categories`)
-  //   return { tourCategories : data }
-  // },
+  async asyncData({ store, $axios }) {
+    const { data } = await $axios.get(`${store.getters.apiURL}/tour-categories`)
+    return { tourCategories : data }
+  },
   computed: {
     ...mapGetters([
-      'apiURL',
       'baseURL',
-      'tourCategories'
     ])
   },
 }

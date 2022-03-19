@@ -58,7 +58,8 @@ export default {
   loading: {
     padding: '10px',
     color: 'orange',
-    height: '2px'
+    height: '2px',
+    continuous: true
   },
   purgeCSS: {
     whitelistPatterns: [/svg.*/, /fa.*/]

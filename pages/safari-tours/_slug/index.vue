@@ -9,14 +9,17 @@ import { mapGetters } from 'vuex';
 
 export default {
   async asyncData({ params, $axios, store }) {
-    if(store.getters.tourCategories.length) {
-      const tourCategory = store.getters.tourCategories.find(el => el.slug === params.slug);
-      return { tourCategories: store.getters.tourCategories, tourCategory }
-    } else {
-      const { data } = await $axios.get(`${store.getters.apiURL}/tour-categories`)
-      const tourCategory = data.find(el => el.slug === params.slug);
-      return { tourCategory: tourCategory, tourCategories: data }
-    }
+    // if(store.getters.tourCategories.length) {
+    //   const tourCategory = store.getters.tourCategories.find(el => el.slug === params.slug);
+    //   return { tourCategories: store.getters.tourCategories, tourCategory }
+    // } else {
+    //   const { data } = await $axios.get(`${store.getters.apiURL}/tour-categories`)
+    //   const tourCategory = data.find(el => el.slug === params.slug);
+    //   return { tourCategory: tourCategory, tourCategories: data }
+    // }
+    const { data } = await $axios.get(`${store.getters.apiURL}/tour-categories`)
+    const tourCategory = data.find(el => el.slug === params.slug)
+    return { tourCategory: tourCategory, tourCategories: data }
   },
   computed: {
     ...mapGetters([

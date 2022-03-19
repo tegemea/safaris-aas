@@ -28,7 +28,7 @@
         <div v-if="tourCategoriesWithTours.length" class="col-md-6 col-lg-3 mb-3">
           <h4 class="thin-fonts">Tanzania Safari Tours</h4>
           <NuxtLink
-            v-for="fTourCategory in tourCategoriesWithTours"
+            v-for="fTourCategory in tourCategoriesWithTours.slice(0,5)"
             :key="fTourCategory.id" 
             :to="`/safari-tours/${fTourCategory.slug}`"
             class="link d-block thin-fonts"
@@ -40,7 +40,7 @@
         <div v-if="destinations.length" class="col-md-6 col-lg-3 mb-3">
           <h4 class="thin-fonts">Safari Destinations</h4>
           <NuxtLink 
-            v-for="fDestination in destinations"
+            v-for="fDestination in destinations.slice(0,5)"
             :to="`/destinations/${fDestination.slug}`" 
             :key="fDestination.id" 
             class="link d-block thin-fonts"
@@ -49,6 +49,7 @@
           <fai :icon="['fas','angle-right']" class="mr-2"></fai>
           {{ fDestination.name }}
           </NuxtLink>
+          <NuxtLink class="link" to="/destinations">See all Destinations</NuxtLink>
         </div>
         <div class="col-md-6 col-lg-3 mb-3">
           <h4 class="thin-fonts">Find & Contact us</h4>

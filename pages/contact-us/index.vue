@@ -135,7 +135,7 @@ label {
   .overlay {
     position: absolute;
     top: 0; left: 0;
-    background: rgba($color: #000000, $alpha: .4);
+    // background: rgba($color: #000000, $alpha: .4);
     width: 100%;
     height: 100%;
   }

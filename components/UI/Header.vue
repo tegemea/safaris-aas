@@ -43,7 +43,7 @@
               <a href="#" target="_blank" title="Follow us on Facebook">
                 <fai :icon="['fab', 'facebook']" class="fa-2x text-warning" />
               </a>
-              <a href="#" target="_blank" title="Follow us on Instagram">
+              <a href="https://instagram.com/animalactionsafaris" target="_blank" title="Follow us on Instagram">
                 <fai :icon="['fab', 'instagram']" class="fa-2x ml-3 text-warning" />
               </a>
               <a href="#" target="_blank" title="Contact us on Skype">
@@ -99,8 +99,11 @@
                 <transition name="slide">
                   <span class="dropdown">
                     <ul class="dropdown-ul">
-                      <li v-for="hDestination in destinations" :key="hDestination.id">
+                      <li v-for="hDestination in destinations.slice(0, 8)" :key="hDestination.id">
                         <NuxtLink :to="`/destinations/${hDestination.slug}`">{{ hDestination.name }}</NuxtLink>
+                      </li>
+                      <li>
+                        <NuxtLink to="/destinations">...See All Destinations</NuxtLink>
                       </li>
                     </ul>
                   </span>

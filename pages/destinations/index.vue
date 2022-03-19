@@ -14,7 +14,7 @@
                   >
                 </NuxtLink>
               </div>
-              <div class="card-body text-justify multiline-ellipsis"
+              <div v-if="destination.description" class="card-body text-justify multiline-ellipsis"
                 v-html="destination.description.length > 130 ? `${destination.description.slice(0, 130)}...` : destination.description"
               >
               </div>
@@ -38,19 +38,20 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  // async asyncData({ store, $axios }) {
-  //   const { data } = await $axios.get(`${store.getters.apiURL}/destinations`)
-  //   return { destinations: data };
-  // },
+  async asyncData({ store, $axios }) {
+    const { data } = await $axios.get(`${store.getters.apiURL}/destinations`)
+    return { destinations: data };
+  },
   computed: {
     ...mapGetters([
-      'apiURL',
       'baseURL',
-      'destinations'
     ]),
+  },
+  methods: {
+    ...mapActions(['getDestinations'])
   }
 }
 </script>
