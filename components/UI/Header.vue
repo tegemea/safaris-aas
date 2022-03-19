@@ -620,12 +620,6 @@ export default {
         margin: 0;
         position: relative;
 
-        &:hover {
-          .dropdown {
-            // display: flex;
-          }
-        }
-
         a {
           display: block;
           padding: 7px 15px;
@@ -702,14 +696,8 @@ export default {
 }
 
 // vue animation effects
-.slide-enter {
-  // 
-}
 .slide-enter-active {
   animation: slide-in 1s ease forwards;
-}
-.slide-leave {
-  // 
 }
 .slide-leave-active {
   animation: slide-out 1s ease forwards;
