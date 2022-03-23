@@ -53,7 +53,7 @@
       </div>
 
       <!-- tour categories -->
-      <div class="row tour-categories mt-5">
+      <div v-if="limitedTourCategories.length" class="row tour-categories mt-5">
         <div class="col-12 mb-3">
           <h2 class="section-title text-center brand-color thin-fonts"><span>Tanzania Experiences we Offer</span></h2>
         </div>
@@ -89,7 +89,7 @@
       </div>
 
       <!-- safari destinations -->
-      <div class="row safari-destinations mt-5">
+      <div v-if="limitedDestinations.length" class="row safari-destinations mt-5">
         <div class="col-12 mb-3">
           <h2 class="section-title text-center brand-color thin-fonts"><span>Tanzania Safari Destinations</span></h2>
         </div>
