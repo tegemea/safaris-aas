@@ -111,6 +111,24 @@
           </div>
         </div>
       </div>
+      
+      <div class="row mt-5 text-center">
+        <div class="col">
+          <a href="https://tanzaniatourism.go.tz/en" title="TTB" target="_blank"><img src="@/assets/images/ttb.png" alt="TTB"></a>
+        </div>
+        <div class="col">
+          <a href="https://tanzaniaparks.go.tz" title="TANAPA" target="_blank"><img src="@/assets/images/tanapa.png" alt="TANAPA"></a>
+        </div>
+        <!-- <div class="col">
+          <a href="https://tatotz.org" title="TATO" target="_blank"><img src="@/assets/images/tato.png" alt="TATO"></a>
+        </div> -->
+        <div class="col">
+          <a href="https://tripadvisor.com" title="TripAdvisor" target="_blank"><img src="@/assets/images/tripadvisor.png" alt="Trip Advisor"></a>
+        </div>
+        <div class="col">
+          <a href="https://flydoc.org" title="Amref Flying Docs" target="_blank"><img src="@/assets/images/amref.png" alt="Amref"></a>
+        </div>
+      </div>
     </div>
   </div>
 </template>

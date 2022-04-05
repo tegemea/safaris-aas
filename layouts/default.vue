@@ -9,59 +9,55 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default {
-  mounted() {
-    window.addEventListener('scroll', this.handleScroll());
-    this.getPages(); 
-    this.getTours(); 
-    this.getTourCategories(); 
-    this.getCountries(); 
-    this.getDestinationCategories(); 
-    this.getDestinations();
-  },
-  unmounted() {
-    window.removeEventListener('scroll', this.handleScroll());
-  },
   computed: {
     ...mapGetters([
-      'pages',
-      'tours',
-      'destinations',
-      'tourCategories'
+      'apiURL',
     ]),
   },
+  activated() {
+    if(this.$fetchState.timestamp <= Date.now() - 3000) this.$fetch();
+  },
+  async fetch() {
+    const [ 
+      { data: pages }, 
+      { data: tours }, 
+      { data: photos },
+      { data: destinations }, 
+      { data: tourCategories }
+    ]
+    = await Promise.all([
+      this.$axios.get(`${this.apiURL}/pages`),
+      this.$axios.get(`${this.apiURL}/tours`),
+      this.$axios.get(`${this.apiURL}/photos`),
+      this.$axios.get(`${this.apiURL}/destinations`),
+      this.$axios.get(`${this.apiURL}/tour-categories`)
+    ])
+    
+    // send all data in store (mutations)
+    this.storePages(pages);
+    this.storeTours(tours);
+    this.storePhotos(photos);
+    this.storeDestinations(destinations);
+    this.storeTourCategories(tourCategories);
+  },
   methods: {
-    ...mapActions([
-      'getPages', 
-      'getTours', 
-      'getTourCategories', 
-      'getCountries', 
-      'getDestinationCategories', 
-      'getDestinations'
-    ]),
-    handleScroll(e) {
-      const value = window.top.scrollY;
-      console.log('scroll value = ',value);
-    }
-  }
+    ...mapMutations([
+      'storePages',
+      'storeTours',
+      'storePhotos',
+      'storeDestinations',
+      'storeTourCategories',
+    ])
+  },
 }
 </script>
 
 <style lang="scss">
 .rotate-icon {
   animation: rotating 2s infinite linear;
-}
-.loading {
-  position: absolute;
-  left: 0; top: 0;
-  width: 100%; height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: radial-gradient(white, rgba(saddlebrown, .3), rgba(saddlebrown, .5));
 }
 .ellipsis {
   white-space: nowrap;

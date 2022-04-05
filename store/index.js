@@ -1,13 +1,12 @@
 export const state = () => ({
   apiURL: `https://aasafari.com/core/api/v1`,
   baseURL: `https://aasafari.com`,
-
   mobileMenu: false,
-  
   destinationCategories: [],
   destinations: [],
   countries: [],
   tourCategories: [],
+  photos: [],
   tours: [],
   pages: []
 })
@@ -17,6 +16,7 @@ export const getters = {
   baseURL(state) { return state.baseURL },
   pages(state) { return state.pages },
   tours(state) { return state.tours },
+  photos(state) { return state.photos },
   tourCategories(state) { return state.tourCategories },
   countries(state) { return state.countries },
   destinationCategories(state) { return state.destinationCategories },
@@ -25,8 +25,9 @@ export const getters = {
 }
 
 export const mutations = {
-  storePages(state, pages) { state.pages = pages },
+  storePages(state, pages) { state.pages = pages; },
   storeTours(state, tours) { state.tours = tours; },
+  storePhotos(state, photos) { state.photos = photos; },
   storeTourCategories(state, tourCategories) { state.tourCategories = tourCategories; },
   storeCountries(state, countries) { state.countries = countries; },
   storeDestinationCategories(state, destinationCategories) { state.destinationCategories = destinationCategories; },

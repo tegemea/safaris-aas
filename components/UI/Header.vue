@@ -109,6 +109,7 @@
                   </span>
                 </transition>
               </li>
+              <li><NuxtLink to="/gallery">Gallery</NuxtLink></li>
               <li><NuxtLink to="/contact-us">Contact us</NuxtLink></li>
             </ul>
           </div>
@@ -152,6 +153,7 @@
                   </span>
                 </transition>
               </li>
+              <li><NuxtLink to="/gallery">Gallery</NuxtLink></li>
               <li @click.prevent="showDropDowns.pages = !showDropDowns.pages">
                 <NuxtLink to="/about-us/about-us">About us</NuxtLink>
                 <transition name="slide">

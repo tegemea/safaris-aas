@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row mb-5">
-      <div class="col-md-12 photo-container p-0">
+      <div v-if="randomTour" class="col-md-12 photo-container p-0">
         <img
           :src="`${baseURL}/storage/tour_header_photos/${randomTour.header_photo}`"
           class="img-fluid"
@@ -60,40 +60,43 @@
           </div>
         </div>
         <div class="col-md-8 mb-5">
-          <form>
+          <form ref="safariForm" id="safariForm" @submit.prevent="processBooking">
             <div class="row">
               <div class="form-group col-lg-6">
                 <label for="name">Your Full Name</label>
-                <input type="text" id="name" class="form-control">
+                <input type="text" v-model="tourist.name" id="name" class="form-control" required>
               </div>
               <div class="form-group col-lg-6">
                 <label for="email">Your Email Address</label>
-                <input type="email" id="email" class="form-control">
+                <input type="email" v-model="tourist.email" id="email" class="form-control" required>
               </div>
             </div>
             <div class="row">
               <div class="form-group col-lg-6">
                 <label for="nationality">Your Nationality</label> <small class="text-black-50">(optional)</small>
-                <input type="text" id="nationality" class="form-control">
+                <input type="text" v-model="tourist.nationality" id="nationality" class="form-control">
               </div>
               <div class="form-group col-lg-6">
-                <label for="email">Your Phone number</label> <small class="text-black-50">(optional)</small>
-                <input type="email" id="email" class="form-control">
+                <label for="phone">Your Phone number</label> <small class="text-black-50">(optional)</small>
+                <input type="text" v-model="tourist.phone" id="phone" class="form-control">
               </div>
             </div>
             <div class="form-group">
               <label for="tour">Select Tour of Interest</label>
-              <select name="tour" id="tour" class="form-control">
+              <select name="tour" v-model="tourist.tourID" id="tour" class="form-control" required>
                 <option value="" selected disabled>--- Select Tour ---</option>
-                <option v-for="tour in tours" :value="tour.name" :key="tour.id">{{ tour.name }}</option>
+                <option v-for="tour in tours" :value="tour.id" :key="tour.id">{{ tour.name }}</option>
               </select>
             </div>
             <div class="form-group">
               <label for="message">Your Message</label>
-              <textarea name="message" id="message" cols="30" rows="6" class="form-control"></textarea>
+              <textarea name="message" v-model="tourist.message" id="message" cols="30" rows="6" class="form-control"></textarea>
             </div>
-            <div class="form-group">
-              <button class="btn btn-secondary">Send Booking or Enquiry</button>
+            <div class="form-group d-flex justify-content-between">
+              <button type="submit" class="btn btn-secondary">Send Booking or Enquiry</button>
+              <div v-if="showSuccessMessage" class="border border-success bg-success rounded p-3 text-light">
+                Congratulations, Your Message have been sent..!
+              </div>
             </div>
           </form>
         </div>
@@ -113,10 +116,34 @@
 import { mapGetters } from 'vuex';
 
 export default {
+  data() {
+    return {
+      showSuccessMessage: false,
+      tourist: {
+        name:'', email:'', phone:'', message:'', tourID:'', nationality:''
+      },
+    }
+  },
   computed: {
-    ...mapGetters(['baseURL','tours']),
+    ...mapGetters(['apiURL','tours']),
     randomTour: function() {
       return this.tours[Math.floor(Math.random() * this.tours.length)];
+    }
+  },
+  methods: {
+    processBooking() {
+      let tourist = this.tourist;
+      this.$axios.post(`${this.apiURL}/send-mail`, { tourist })
+        .then(res => { console.log(res)
+          if(res.status === 200) {
+            this.showSuccessMessage = true;
+            setTimeout(() => this.showSuccessMessage = false, 5000);
+            this.tourist.name = ''; this.tourist.email = ''; this.tourist.phone = ''; 
+            this.tourist.message = ''; this.tourist.nationality = '';
+            this.tourist.tourID = '';
+          }
+        }
+      );
     }
   }
 }

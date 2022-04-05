@@ -21,9 +21,16 @@
         </div>
       </div>
     </div>
-    <div class="container">
+    
+    <div v-if="$fetchState.pending" class="col-12 loading">
+      <h1 class="text-black-50">Loading...</h1>
+      <span class="spinner"></span>
+    </div>
+    <div v-else-if="$fetchState.error" class="col-12">
+      Error while fetching data...
+    </div>
+    <div v-else class="container">
       <div class="row">
-        
         <div class="col-lg-8">
           <div class="row">
             <div class="col-12 mb-3">
@@ -50,6 +57,7 @@
               </div>
             </div>
           </div>
+          
           <!-- <div class="text-justify serif-fonts mb-4" v-html="tour.overview"></div> -->
           <div v-for="(day, i) in tour.days" :key="day.id" class="mb-4">
             <div class="card days">
@@ -133,8 +141,34 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  props : [ 'tour', 'baseURL' ],
+  data() {
+    return {
+      tours: [],
+      tour: {}
+    }
+  },
+  computed: {
+    ...mapGetters(['baseURL', 'apiURL'])
+  },
+  activated() {
+    if(this.$fetchState.timestamp <= Date.now() - 3000) this.$fetch()
+  },
+  async fetch() {
+    let toursInStore = this.$store.getters.tours;
+    if(!toursInStore.length) {
+      const { data } = await this.$axios.get(`${this.apiURL}/tours`);
+      this.tour = data.find(t => t.slug === this.$route.params.slug);
+      this.tours = data;
+    } else {
+      this.tour = toursInStore.find(t => t.slug === this.$route.params.slug)
+      this.tours = toursInStore;
+    }
+    
+    
+  },
   head() {
       return {
       title: this.tour.seo_title
@@ -154,7 +188,7 @@ export default {
   methods: {
     numberWithCommas(x) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
+    },
   }
 }
 </script>

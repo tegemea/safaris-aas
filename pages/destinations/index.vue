@@ -1,6 +1,14 @@
 <template>
   <div>
-    <div class="container pt-5">
+    
+    <div v-if="$fetchState.pending" class="col-12 loading">
+      <h1 class="text-black-50">Loading...</h1>
+      <span class="spinner"></span>
+    </div>
+    <div v-else-if="$fetchState.error" class="col-12">
+      Error while fetching data...
+    </div>
+    <div v-else class="container pt-5">
       <div class="row">
         <div class="col-md-4" v-for="destination in destinations" :key="destination.id">
           <div class="card-deck">
@@ -41,17 +49,30 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  async asyncData({ store, $axios }) {
-    const { data } = await $axios.get(`${store.getters.apiURL}/destinations`)
-    return { destinations: data };
+  data() {
+    return {
+      destinations: []
+    }
+  },
+  activated() {
+    if(this.$fetchState.timestamp <= Date.now() - 3000) this.$fetch();
+  },
+  async fetch() {
+    let destinationsInStore = this.$store.getters.destinations;
+    if(!destinationsInStore.length) {
+      const { data: destinations } = await this.$axios.get(`${this.apiURL}/destinations`);
+      this.destinations = destinations; this.storeDestinations(destinations);
+    } else {
+      this.destinations = destinationsInStore;
+    }
   },
   computed: {
     ...mapGetters([
-      'baseURL',
+      'baseURL','apiURL',
     ]),
   },
   methods: {
-    ...mapActions(['getDestinations'])
+    ...mapActions(['storeDestinations'])
   }
 }
 </script>

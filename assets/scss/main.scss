@@ -25,3 +25,34 @@ body {
   font-size: 16px;
   font-weight: 400;
 }
+
+.loading {
+  margin-top: 50px;
+  padding: 50px;
+  text-align: center;
+
+  .spinner {
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    margin-top: 30px;
+    border-radius: 50%;
+    border-left: 4px solid white;
+    border-top: 4px solid $orange-color;
+    border-right: 4px solid $orange-color;
+    border-bottom: 4px solid $orange-color;
+    animation: spin-loader 1s infinite linear;
+  }
+}
+
+@keyframes spin-loader {
+  0% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

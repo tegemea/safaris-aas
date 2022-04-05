@@ -11,9 +11,26 @@
         <div class="title serif-fonts text-capitalize">{{ page.name }}</div>
       </div>
     </div>
-    <div class="container">
+
+    <div v-if="$fetchState.pending" class="col-12 loading">
+      <h1 class="text-black-50">Loading...</h1>
+      <span class="spinner"></span>
+    </div>
+    <div v-else-if="$fetchState.error" class="col-12">
+      Error while fetching data...
+    </div>
+    <div else class="container">
       <div class="row">
-        <div class="col-lg-8 col-md-7 text-justify mb-3" v-html="page.description"></div>
+        <div class="col-lg-8 col-md-7 mb-3">
+          <div class="text-justify" v-html="page.description"></div>
+          <div class="row d-flex align-items-center" v-if="page.slug.includes('about')">
+            <div class="col-md-4">
+              <img src="@/assets/images/director.jpg" class="img-fluid rounded rounded-circle border p-2" alt="Director, Leonard">
+            </div>
+            <h4 class="col-md-8 thin-fonts">Director <br><span class="text-black-50">Leonard Alfayo</span></h4>
+          </div>
+        </div>
+        
         <div class="col-lg-4 col-md-5 side-bar mb-3">
           <div class="card">
             <h3 class="thin-fonts card-header brand-color">
@@ -39,8 +56,37 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
+
 export default {
-  props : [ 'page', 'pages', 'baseURL' ],
+  // props : [ 'page', 'pages', 'baseURL' ],
+  data() {
+    return {
+      pages: [],
+      page: {}
+    }
+  },
+  activated() {
+    if(this.$fetchState.timestamp <= Date.now() - 3000) this.$fetch()
+  },
+  computed: {
+    ...mapGetters(['baseURL', 'apiURL']),
+    sidebarPages: function() {
+      return this.pages.filter(p => p.id !== this.page.id)
+    }
+  },
+  async fetch() {
+    let pagesInStore = this.$store.getters.pages;
+    if(!pagesInStore.length || this.$fetchState.timestamp <= Date.now() - 3000) {
+      const { data: pages } = await this.$axios.get(`${this.apiURL}/pages`)
+      this.page = pages.find(p => p.slug === this.$route.params.slug)
+      this.pages = pages; this.storePages(pages)
+    } else {
+      this.page = pagesInStore.find(p => p.slug === this.$route.params.slug)
+      this.pages = pagesInStore
+    }
+    
+  },
   head() {
       return {
       title: this.page.seo_title
@@ -52,15 +98,13 @@ export default {
           name: 'description',
           content: this.page.meta_description
             ? this.page.meta_description
-            : this.page.description.substr(1, 160)
+            : this.page.description
         }
       ]
     }
   },
-  computed: {
-    sidebarPages: function() {
-      return this.pages.filter(p => p.id !== this.page.id)
-    }
+  methods: {
+    ...mapMutations(['storePages'])
   }
 }
 </script>

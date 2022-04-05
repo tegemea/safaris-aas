@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row mb-5">
-      <div class="col-lg-12 photo-container p-0">
+      <div v-if="tourCategory" class="col-lg-12 photo-container p-0">
         <img 
           :src="`${baseURL}/storage/tour_category_photos/${tourCategory.photo}`" 
           class="img-fluid" 
@@ -10,10 +10,15 @@
         <div class="title serif-fonts">{{ tourCategory.name }}</div>
       </div>
     </div>
-    <div class="container">
-      <div class="row">
-        <!-- <div class="col-lg-12"><h1 class="cursive-fonts">{{ tourCategory.name }}</h1></div> -->
-      </div>
+    
+    <div v-if="$fetchState.pending" class="col-12 loading">
+      <h1 class="text-black-50">Loading...</h1>
+      <span class="spinner"></span>
+    </div>
+    <div v-else-if="$fetchState.error" class="col-12">
+      Error while fetching data...
+    </div>
+    <div v-else class="container">
       <div v-if="tourCategory.tours.length" class="row">
         <div class="col-lg-12 mb-4 text-justify" v-html="tourCategory.description"></div>
         <div class="col-md-7 col-lg-8 mb-3">
@@ -95,17 +100,43 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
-  props: [ 'tourCategory', 'tourCategories', 'baseURL' ],
+  data() {
+    return {
+      tourCategories: [],
+      tourCategory: {}
+    }
+  },
+  computed: {
+    ...mapGetters(['baseURL', 'apiURL']),
+    categoriesWithoutCurrentCategory: function() {
+      return this.tourCategories.filter(c => c.id !== this.tourCategory.id)
+    }
+  },
+  activated() {
+    if(this.$fetchState.timestamp <= Date.now() - 3000) this.$fetch();
+  },
+  async fetch() {
+    let categoriesInStore = this.$store.getters.tourCategories;
+    if(!categoriesInStore.length) {
+      const { data: categories } = await this.$axios.get(`${this.apiURL}/tour-categories`);
+      this.tourCategory = categories.find(c => c.slug === this.$route.params.slug);
+      this.tourCategories = categories; this.storeTourCategories(categories);
+    } else {
+      this.tourCategory = categoriesInStore.find(c => c.slug === this.$route.params.slug);
+      this.tourCategories = categoriesInStore;
+    }
+    
+  },
   head() {
     return {
       title: this.tourCategory.seo_title ? this.tourCategory.seo_title : this.tourCategory.name
     }
   },
-  computed: {
-    categoriesWithoutCurrentCategory: function() {
-      return this.tourCategories.filter(c => c.id !== this.tourCategory.id)
-    }
+  methods: {
+    ...mapActions(['storeTourCategories'])
   }
 }
 </script>

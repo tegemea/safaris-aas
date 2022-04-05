@@ -2,7 +2,14 @@
   <div>
     <div class="container pt-5">
       <div class="row">
-        <div class="col-md-6" v-for="tourCategory in tourCategories" :key="tourCategory.id">
+        <div v-if="$fetchState.pending" class="col-12 loading">
+          <h1 class="text-black-50">Loading...</h1>
+          <span class="spinner"></span>
+        </div>
+        <div v-else-if="$fetchState.error">
+          Error while fetching data...
+        </div>
+        <div v-else class="col-md-6" v-for="tourCategory in tourCategories" :key="tourCategory.id">
           <div class="card mb-4">
             <div class="card-body p-0">
               <NuxtLink :to="`/safari-tours/${tourCategory.slug}`" :title="tourCategory.name">
@@ -55,13 +62,26 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  async asyncData({ store, $axios }) {
-    const { data } = await $axios.get(`${store.getters.apiURL}/tour-categories`)
-    return { tourCategories : data }
+  data() {
+    return {
+      tourCategories: []
+    }
+  },
+  activated() {
+    if(this.$fetchState.timestamp <= Date.now() - 3000) this.$fetch();
+  },
+  async fetch() {
+    let categoriesInStore = this.$store.getters.tourCategories
+    if(!categoriesInStore.length) {
+      const { data: categories } = await this.$axios.get(`${this.apiURL}/tour-categories`)
+      this.tourCategories = categories;
+    } else {
+      this.tourCategories = categoriesInStore;
+    }
   },
   computed: {
     ...mapGetters([
-      'baseURL',
+      'baseURL','apiURL'
     ])
   },
 }
