@@ -1,23 +1,61 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400&family=Licorice&family=Noto+Serif:wght@400;700&family=Yanone+Kaffeesatz&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Lato&family=Licorice&family=Noto+Serif:wght@400;700&family=Square+Peg&family=Yanone+Kaffeesatz:wght@300;400&display=swap');
 
-$base-font: 'Lato', sans-serif;
-$serif-font: 'Noto Serif', serif;
-$thin-fonts: 'Yanone Kaffeesatz', sans-serif;
-$cursive-font: 'Licorice', cursive;
+// @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400&family=Licorice&family=Noto+Serif:wght@400;700&family=Yanone+Kaffeesatz&display=swap');
 
-.base-font { font-family: $base-font; font-weight: 400; }
-.serif-fonts { font-family: $serif-font; font-weight: 400; }
-.thin-fonts { font-family: $thin-fonts; }
-.cursive-fonts { font-family: $cursive-font; }
+
+$base-font: 'Lato',
+sans-serif;
+$serif-font: 'Noto Serif',
+serif;
+$thin-fonts: 'Yanone Kaffeesatz',
+sans-serif;
+$cursive-font: 'Licorice',
+cursive;
+
+$dancing-script: 'Dancing Script',
+cursive;
+
+$square-peg: 'Square Peg',
+cursive;
+
+.base-font {
+  font-family: $base-font;
+  font-weight: 400;
+}
+
+.serif-fonts {
+  font-family: $serif-font;
+  font-weight: 400;
+}
+
+.thin-fonts {
+  font-family: $thin-fonts;
+}
+
+.cursive-fonts {
+  font-family: $dancing-script;
+}
 
 $base-color: #333;
+$gray-color: rgb(97, 96, 96);
 $brand-color : #463313;
-$orange-color : orange;
+$orange-color : rgb(255, 197, 91);
 
-.brand-color { color: $brand-color }
-.orange-color { color: $orange-color }
-.orange-bg { background: $orange-color }
-.brand-bg { background: $brand-color }
+.brand-color {
+  color: $brand-color
+}
+
+.orange-color {
+  color: $orange-color
+}
+
+.orange-bg {
+  background: $orange-color
+}
+
+.brand-bg {
+  background: $brand-color
+}
 
 body {
   color: $base-color;
@@ -49,9 +87,11 @@ body {
   0% {
     transform: rotate(0);
   }
+
   50% {
     transform: rotate(180deg);
   }
+
   100% {
     transform: rotate(360deg);
   }

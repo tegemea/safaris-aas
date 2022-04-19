@@ -11,7 +11,7 @@ import {
     faPhoneAlt, faUserSecret, faCircleNotch, faBars
   } from '@fortawesome/free-solid-svg-icons'
 // import { faPaw } from '@fortawesome/free-solid-svg-icons'
-import { faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons'
+import { faFacebook, faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons'
 // import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faSkype } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -24,6 +24,7 @@ library.add(
   faPaw,
   faFacebook, 
   faInstagram,
+  faWhatsapp,
   faSkype, 
   faBuilding, 
   faAngleRight,

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row mb-5">
+    <div v-if="destination" class="row mb-5">
       <div class="col-md-12 photo-container p-0">
         <img
           :src="`${baseURL}/storage/destination_photos/${destination.photo}`"
@@ -12,14 +12,14 @@
       </div>
     </div>
 
-    <div v-if="$fetchState.pending" class="col-12 loading">
+    <!-- <div v-if="$fetchState.pending" class="col-12 loading">
       <h1 class="text-black-50">Loading...</h1>
       <span class="spinner"></span>
     </div>
     <div v-else-if="$fetchState.error" class="col-12">
       Error while fetching data...
-    </div>
-    <div v-else class="container">
+    </div> -->
+    <div v-if="destinations.length" class="container">
       <div class="row">
         <div class="col-md-7 col-lg-8 text-justify" v-html="destination.description"></div>
         <div class="col-md-5 col-lg-4 side-bar">
@@ -55,35 +55,32 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
-  data() {
-    return {
-      destinations: [],
-      destination: {}
-    }
-  },
   computed: {
-    ...mapGetters(['baseURL','apiURL']),
+    ...mapGetters({
+      apiURL: 'apiURL',
+      baseURL: 'baseURL',
+      destinations: 'destinations/destinations'
+    }),
+    destination() {
+      return this.destinations.find(d => d.slug === this.$route.params.slug)
+    },
     sidebarDestinations: function() {
       return this.destinations.filter(d => d.id !== this.destination.id)
     }
   },
-  activated() {
-    if(this.$fetchState.timestamp <= Date.now() - 3000) this.$fetch()
-  },
-  async fetch() {
-    let destinationsInStore = this.$store.getters.destinations
-    if(!destinationsInStore.length) {
-      const { data: destinations } = await this.$axios.get(`${this.apiURL}/destinations`)
-      this.destination = destinations.find(d => d.slug === this.$route.params.slug)
-      this.destinations = destinations; this.storeDestinations(destinations)
-    } else {
-      this.destination = destinationsInStore.find(d => d.slug === this.$route.params.slug)
-      this.destinations = destinationsInStore;
-    }
-  },
+  // created() {
+  //   if(this.$fetchState.timestamp > Date.now() - 30000) this.$fetch()
+  // },
+  // async asyncData() {
+
+  // },
+  // async fetch() {
+  //   const { data: destinations } = await this.$axios.get(`${this.apiURL}/destinations`)
+  //   this.$store.commit('destinations/SET_DESTINATIONS', destinations)
+  // },
   // head() {
   //     return {
   //     title: this.destination.seo_title
@@ -100,9 +97,6 @@ export default {
   //     ]
   //   }
   // },
-  methods: {
-    ...mapMutations(['storeDestinations'])
-  }
 }
 </script>
 

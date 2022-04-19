@@ -1,91 +1,87 @@
 <template>
   <div>
-    <div class="row mb-5">
-      <div class="col-md-12 photo-container p-0">
-        <img
-          :src="`${baseURL}/storage/page_photos/${page.photo}`"
-          class="img-fluid"
-          :alt="page.photo"
-        >
-        <div class="overlay"></div>
-        <div class="title serif-fonts text-capitalize">{{ page.name }}</div>
-      </div>
-    </div>
-
-    <div v-if="$fetchState.pending" class="col-12 loading">
+    
+    <!-- <div v-if="$fetchState.pending" class="col-12 loading">
       <h1 class="text-black-50">Loading...</h1>
       <span class="spinner"></span>
     </div>
     <div v-else-if="$fetchState.error" class="col-12">
       Error while fetching data...
-    </div>
-    <div else class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-7 mb-3">
-          <div class="text-justify" v-html="page.description"></div>
-          <div class="row d-flex align-items-center" v-if="page.slug.includes('about')">
-            <div class="col-md-4">
-              <img src="@/assets/images/director.jpg" class="img-fluid rounded rounded-circle border p-2" alt="Director, Leonard">
-            </div>
-            <h4 class="col-md-8 thin-fonts">Director <br><span class="text-black-50">Leonard Alfayo</span></h4>
+    </div> -->
+    <div v-if="page">
+        <div class="row mb-5">
+          <div class="col-md-12 photo-container p-0">
+            <img
+              :src="`${baseURL}/storage/page_photos/${page.photo}`"
+              class="img-fluid"
+              :alt="page.photo"
+            >
+            <div class="overlay"></div>
+            <div class="title serif-fonts text-capitalize">{{ page.name }}</div>
           </div>
         </div>
-        
-        <div class="col-lg-4 col-md-5 side-bar mb-3">
-          <div class="card">
-            <h3 class="thin-fonts card-header brand-color">
-              <fai :icon="['fas','map-marker-alt']" class="mr-3"></fai>
-              COMPANY LINKS
-            </h3>
-            <div class="card-body p-0">
-              <ul class="list-group list-group-flush">
-                <NuxtLink  
-                  v-for="p in sidebarPages"
-                  :to="`/about-us/${p.slug}`" 
-                  class="list-group-item" :key="p.id">
-                  <fai :icon="['fas', 'angle-right']" class="mr-3"></fai>
-                  {{ p.name }}
-                </NuxtLink>
-              </ul>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-7 mb-3">
+              <div class="text-justify" v-html="page.description"></div>
+              <div class="row d-flex align-items-center" v-if="page.slug.includes('about')">
+                <div class="col-md-4">
+                  <img src="@/assets/images/director.jpg" class="img-fluid rounded rounded-circle border p-2" alt="Director, Leonard">
+                </div>
+                <h4 class="col-md-8 thin-fonts">Director <br><span class="text-black-50">Leonard Alfayo</span></h4>
+              </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-5 side-bar mb-3">
+              <div class="card">
+                <h3 class="thin-fonts card-header brand-color">
+                  <fai :icon="['fas','map-marker-alt']" class="mr-3"></fai>
+                  COMPANY LINKS
+                </h3>
+                <div class="card-body p-0">
+                  <ul class="list-group list-group-flush">
+                    <NuxtLink  
+                      v-for="p in sidebarPages"
+                      :to="`/about-us/${p.slug}`" 
+                      class="list-group-item" :key="p.id">
+                      <fai :icon="['fas', 'angle-right']" class="mr-3"></fai>
+                      {{ p.name }}
+                    </NuxtLink>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    
   </div>
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
-  // props : [ 'page', 'pages', 'baseURL' ],
-  data() {
-    return {
-      pages: [],
-      page: {}
-    }
-  },
-  activated() {
-    if(this.$fetchState.timestamp <= Date.now() - 3000) this.$fetch()
-  },
   computed: {
-    ...mapGetters(['baseURL', 'apiURL']),
+    ...mapGetters({ 
+      apiURL: 'apiURL', 
+      baseURL: 'baseURL', 
+      pages: 'pages/pages'
+    }),
+    page() {
+      return this.pages.find(p => p.slug === this.$route.params.slug)
+    },
     sidebarPages: function() {
       return this.pages.filter(p => p.id !== this.page.id)
     }
   },
+  created() {
+    if(this.$fetchState.timestamp > Date.now() - 30000) this.$fetch();
+  },
   async fetch() {
-    let pagesInStore = this.$store.getters.pages;
-    if(!pagesInStore.length || this.$fetchState.timestamp <= Date.now() - 3000) {
-      const { data: pages } = await this.$axios.get(`${this.apiURL}/pages`)
-      this.page = pages.find(p => p.slug === this.$route.params.slug)
-      this.pages = pages; this.storePages(pages)
-    } else {
-      this.page = pagesInStore.find(p => p.slug === this.$route.params.slug)
-      this.pages = pagesInStore
-    }
-    
+    const { data: pages } = await this.$axios.get(`${this.apiURL}/pages`);
+    this.$store.commit('pages/SET_PAGES', pages);
   },
   head() {
       return {
@@ -103,9 +99,6 @@ export default {
       ]
     }
   },
-  methods: {
-    ...mapMutations(['storePages'])
-  }
 }
 </script>
 

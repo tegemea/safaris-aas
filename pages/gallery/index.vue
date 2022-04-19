@@ -12,14 +12,14 @@
       </div>
     </div>
     
-    <div v-if="$fetchState.pending" class="loading">
+    <!-- <div v-if="$fetchState.pending" class="loading">
       <h1 class="text-black-50">Loading...</h1>
       <span class="spinner"></span>
     </div>
     <div v-else-if="$fetchState.error">
       Error while fetching data...
-    </div>
-    <div v-else class="container">
+    </div> -->
+    <div v-if="photos.length" class="container">
       <div class="row">
         <div class="col-md-12 mb-5">
           <div class="card-columns">
@@ -39,38 +39,32 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
-  data() {
-    return {
-      photos: []
-    }
-  },
   computed: {
-    ...mapGetters(['baseURL', 'apiURL','tours']),
+    ...mapGetters({
+      baseURL: 'baseURL',
+      apiURL: 'apiURL',
+      tours: 'tours/tours',
+      photos: 'photos/photos'
+    }),
     randomTour: function() {
       if(this.tours.length) {
         return this.tours[Math.floor(Math.random() * this.tours.length)];
       } else console.log('no tours!')
     }
   },
-  activated() {
-    if(this.$fetchState.timestamp <= Date.now() - 3000) this.$fetch();
+  created() {
+    if(this.$fetchState.timestamp > Date.now() - 3000) this.$fetch();
   },
   async fetch() {
-    let photosInStore = this.$store.getters.photos;
-    if(!photosInStore) {
-      const { data } = await this.$axios.get(`${this.apiURL}/photos`);
-      this.photos = data;
-      this.storePhotos(data)
-    } else {
-      this.photos = photosInStore;
-    }
+    const { data: photos } = await this.$axios.get(`${this.apiURL}/photos`);
+    const { data: tours } = await this.$axios.get(`${this.apiURL}/tours`);
+    
+    if(photos.length) this.$store.commit('photos/SET_PHOTOS', photos);
+    if(tours.length) this.$store.commit('tours/SET_TOURS', tours);
   },
-  methods: {
-    ...mapMutations(['storePhotos'])
-  }
 }
 </script>
 

@@ -57,8 +57,7 @@
               </div>
             </div>
           </div>
-          
-          <!-- <div class="text-justify serif-fonts mb-4" v-html="tour.overview"></div> -->
+
           <div v-for="(day, i) in tour.days" :key="day.id" class="mb-4">
             <div class="card days">
               <h4 class="card-header">
@@ -108,7 +107,6 @@
           </div>
         </div>
         
-        <!-- Tour sidebar -->
         <div class="col-lg-4 mb-3">
           <div class="sticky">
             <MinSafariBookingForm :tour="tour" />
@@ -144,30 +142,22 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  data() {
-    return {
-      tours: [],
-      tour: {}
+  computed: {
+    ...mapGetters({
+      apiURL: 'apiURL',
+      baseURL: 'baseURL',
+      tours: 'tours/tours'
+    }),
+    tour() {
+      return this.tours.find(t => t.slug === this.$route.params.slug)
     }
   },
-  computed: {
-    ...mapGetters(['baseURL', 'apiURL'])
-  },
-  activated() {
-    if(this.$fetchState.timestamp <= Date.now() - 3000) this.$fetch()
+  created() {
+    if(this.$fetchState.timestamp > Date.now() - 3000) this.$fetch()
   },
   async fetch() {
-    let toursInStore = this.$store.getters.tours;
-    if(!toursInStore.length) {
-      const { data } = await this.$axios.get(`${this.apiURL}/tours`);
-      this.tour = data.find(t => t.slug === this.$route.params.slug);
-      this.tours = data;
-    } else {
-      this.tour = toursInStore.find(t => t.slug === this.$route.params.slug)
-      this.tours = toursInStore;
-    }
-    
-    
+    const { data: tours } = await this.$axios.get(`${this.apiURL}/tours`);
+    this.$store.commit('tours/SET_TOURS', tours)
   },
   head() {
       return {

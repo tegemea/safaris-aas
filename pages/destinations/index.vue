@@ -1,14 +1,15 @@
 <template>
   <div>
     
-    <div v-if="$fetchState.pending" class="col-12 loading">
+    <!-- <div v-if="$fetchState.pending" class="col-12 loading">
       <h1 class="text-black-50">Loading...</h1>
       <span class="spinner"></span>
     </div>
     <div v-else-if="$fetchState.error" class="col-12">
       Error while fetching data...
-    </div>
-    <div v-else class="container pt-5">
+    </div> -->
+    
+    <div v-if="destinations.length" class="container pt-5">
       <div class="row">
         <div class="col-md-4" v-for="destination in destinations" :key="destination.id">
           <div class="card-deck">
@@ -18,7 +19,7 @@
                   <img 
                     :src="`${baseURL}/storage/destination_photos/${destination.photo}`"
                     class="img-fluid"
-                    :alt="destination.photo"
+                    :alt="destination.name"
                   >
                 </NuxtLink>
               </div>
@@ -46,33 +47,27 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
-  data() {
-    return {
-      destinations: []
-    }
+  computed: {
+    ...mapGetters({
+      apiURL: 'apiURL',
+      baseURL: 'baseURL',
+      destinations: 'destinations/destinations'
+    })
   },
-  activated() {
-    if(this.$fetchState.timestamp <= Date.now() - 3000) this.$fetch();
+  created() {
+    if(this.$fetchState.timestamp > Date.now() - 3000) this.$fetch();
   },
   async fetch() {
-    let destinationsInStore = this.$store.getters.destinations;
-    if(!destinationsInStore.length) {
-      const { data: destinations } = await this.$axios.get(`${this.apiURL}/destinations`);
-      this.destinations = destinations; this.storeDestinations(destinations);
-    } else {
-      this.destinations = destinationsInStore;
+    const { data: destinations } = await this.$axios.get(`${this.apiURL}/destinations`);
+    this.$store.commit('destinations/SET_DESTINATIONS', destinations)
+  },
+  head() {
+    return {
+      title: 'African Safari Destinations'
     }
-  },
-  computed: {
-    ...mapGetters([
-      'baseURL','apiURL',
-    ]),
-  },
-  methods: {
-    ...mapActions(['storeDestinations'])
   }
 }
 </script>

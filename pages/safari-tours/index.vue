@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container pt-5">
-      <div class="row">
+      <div class="row border border-info">
         <div v-if="$fetchState.pending" class="col-12 loading">
           <h1 class="text-black-50">Loading...</h1>
           <span class="spinner"></span>
@@ -9,50 +9,53 @@
         <div v-else-if="$fetchState.error">
           Error while fetching data...
         </div>
-        <div v-else class="col-md-6" v-for="tourCategory in tourCategories" :key="tourCategory.id">
-          <div class="card mb-4">
-            <div class="card-body p-0">
-              <NuxtLink :to="`/safari-tours/${tourCategory.slug}`" :title="tourCategory.name">
-                <img 
-                  :src="`${baseURL}/storage/tour_category_photos/${tourCategory.photo}`"
-                  class="img-fluid"
-                  :alt="tourCategory.name"
+        <div v-if="tourCategories.length">
+          <div class="col-md-6" v-for="tourCategory in tourCategories" :key="tourCategory.id">
+            <div class="card mb-4">
+              <div class="card-body p-0">
+                <NuxtLink :to="`/safari-tours/${tourCategory.slug}`" :title="tourCategory.name">
+                  <img 
+                    :src="`${baseURL}/storage/tour_category_photos/${tourCategory.photo}`"
+                    class="img-fluid"
+                    :alt="tourCategory.name"
+                  >
+                </NuxtLink>
+              </div>
+              <h1 class="thin-fonts card-body pb-0 ellipsis">
+                <NuxtLink :to="`/safari-tours/${tourCategory.slug}`" 
+                  class="text-black-50 text-decoration-none"
+                  :title="tourCategory.name"
                 >
-              </NuxtLink>
-            </div>
-            <h1 class="thin-fonts card-body pb-0 ellipsis">
-              <NuxtLink :to="`/safari-tours/${tourCategory.slug}`" 
-                class="text-black-50 text-decoration-none"
-                :title="tourCategory.name"
+                  <fai :icon="['fas','paw']" class="brand-color mr-2"></fai>
+                  {{ tourCategory.name }}
+                </NuxtLink>
+              </h1>
+              <div class="card-body text-justify pt-0"
+                v-html="tourCategory.description.length > 150 
+                ? tourCategory.description.substring(0, 150) + '...'
+                : tourCategory.description"
               >
-                <fai :icon="['fas','paw']" class="brand-color mr-2"></fai>
-                {{ tourCategory.name }}
-              </NuxtLink>
-            </h1>
-            <div class="card-body text-justify pt-0"
-              v-html="tourCategory.description.length > 150 
-              ? tourCategory.description.substring(0, 150) + '...'
-              : tourCategory.description"
-            >
+              </div>
+              <h4 class="card-footer thin-fonts">
+                <NuxtLink 
+                  :to="`/safari-tours/${tourCategory.slug}`"
+                  :title="`View ${tourCategory.name}`"
+                  class="orange-color"
+                >
+                  <div class="badge badge-pill badge-secondary">
+                    <fai :icon="['fas','angle-right']" class="mr-1"></fai>
+                    View {{ tourCategory.name }}
+                    <span v-if="tourCategory.tours.length" class="text-warning">
+                      - {{ tourCategory.tours.length }}
+                        {{ tourCategory.tours.length > 1 ? 'tours' : 'tour' }}
+                    </span>
+                  </div>
+                </NuxtLink>
+              </h4>
             </div>
-            <h4 class="card-footer thin-fonts">
-              <NuxtLink 
-                :to="`/safari-tours/${tourCategory.slug}`"
-                :title="`View ${tourCategory.name}`"
-                class="orange-color"
-              >
-                <div class="badge badge-pill badge-secondary">
-                  <fai :icon="['fas','angle-right']" class="mr-1"></fai>
-                  View {{ tourCategory.name }}
-                  <span v-if="tourCategory.tours.length" class="text-warning">
-                    - {{ tourCategory.tours.length }}
-                      {{ tourCategory.tours.length > 1 ? 'tours' : 'tour' }}
-                  </span>
-                </div>
-              </NuxtLink>
-            </h4>
           </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -62,27 +65,24 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  data() {
-    return {
-      tourCategories: []
-    }
+  computed: {
+    ...mapGetters({
+      baseURL: 'baseURL',
+      apiURL: 'apiURL',
+      tourCategories: 'tourCategories/tourCategories'
+    })
   },
-  activated() {
-    if(this.$fetchState.timestamp <= Date.now() - 3000) this.$fetch();
+  created() {
+    if(this.$fetchState.timestamp > Date.now() - 30000) this.$fetch();
   },
   async fetch() {
-    let categoriesInStore = this.$store.getters.tourCategories
-    if(!categoriesInStore.length) {
-      const { data: categories } = await this.$axios.get(`${this.apiURL}/tour-categories`)
-      this.tourCategories = categories;
-    } else {
-      this.tourCategories = categoriesInStore;
-    }
+    const { data: categories } = await this.$axios.get(`${this.apiURL}/tour-categories`);
+    this.$store.commit('tourCategories/SET_TOUR_CATEGORIES', categories);
   },
-  computed: {
-    ...mapGetters([
-      'baseURL','apiURL'
-    ])
+  head() {
+    return {
+      title: 'Budget Tanzania Safaris & Luxury Holidays'
+    }
   },
 }
 </script>

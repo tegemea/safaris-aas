@@ -125,8 +125,13 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['apiURL','tours']),
+    ...mapGetters({
+      apiURL: 'apiURL',
+      baseURL: 'baseURL',
+      tours: 'tours/tours'
+    }),
     randomTour: function() {
+      console.log('random tours');
       return this.tours[Math.floor(Math.random() * this.tours.length)];
     }
   },

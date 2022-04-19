@@ -1,6 +1,5 @@
 export default ({ app }) => {
-  app.router.afterEach(() => {
-    // hide mobile menu after every route
-    app.store.commit('hideMobileMenuView');
+  app.router.beforeEach(() => {
+    app.store.commit('hideMobileMenuView'); // hide mobile menu after every route
   })
 }

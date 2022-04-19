@@ -1,143 +1,136 @@
 <template>
   <div>
-    <div class="row mb-5">
-      <div v-if="tourCategory" class="col-lg-12 photo-container p-0">
-        <img 
-          :src="`${baseURL}/storage/tour_category_photos/${tourCategory.photo}`" 
-          class="img-fluid" 
-          :alt="tourCategory.name">
-        <div class="overlay"></div>
-        <div class="title serif-fonts">{{ tourCategory.name }}</div>
-      </div>
-    </div>
     
-    <div v-if="$fetchState.pending" class="col-12 loading">
+    <!-- <div v-if="$fetchState.pending" class="col-12 loading">
       <h1 class="text-black-50">Loading...</h1>
       <span class="spinner"></span>
     </div>
-    <div v-else-if="$fetchState.error" class="col-12">
-      Error while fetching data...
-    </div>
-    <div v-else class="container">
-      <div v-if="tourCategory.tours.length" class="row">
-        <div class="col-lg-12 mb-4 text-justify" v-html="tourCategory.description"></div>
-        <div class="col-md-7 col-lg-8 mb-3">
-          <div class="row">
-            <div v-for="tour in tourCategory.tours" class="col-lg-6" :key="tour.id">
-              <div class="card mb-3">
-                <div class="card-body p-0">
-                  <NuxtLink :to="`/tour/${tour.slug}`">
-                    <img 
-                      :src="`${baseURL}/storage/tour_feature_photos/${tour.feature_photo}`"
+    <div v-else-if="$fetchState.error" class="col-12 py-5">
+      <h5 class="text-secondary text-center">Sorry. Error fetching Tours, please refresh your page..!</h5>
+    </div> -->
+    
+    <div v-if="tourCategory">
+      <div class="row mb-5">
+        <div class="col-lg-12 photo-container p-0">
+          <img 
+            :src="`${baseURL}/storage/tour_category_photos/${tourCategory.photo}`" 
+            class="img-fluid" 
+            :alt="tourCategory.name">
+          <div class="overlay"></div>
+          <div class="title serif-fonts">{{ tourCategory.name }}</div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 mb-4 text-justify" v-html="tourCategory.description"></div>
+          <div v-if="tourCategory.tours.length" class="col-md-7 col-lg-8 mb-3">
+            <div class="row">
+              <div v-for="tour in tourCategory.tours" class="col-lg-6" :key="tour.id">
+                <div class="card mb-3">
+                  <div class="card-body p-0">
+                    <NuxtLink :to="`/tour/${tour.slug}`">
+                      <img 
+                        :src="`${baseURL}/storage/tour_feature_photos/${tour.feature_photo}`"
+                        :title="`${tour.days.length} days ${tour.name}`"
+                        class="img-fluid" :alt="tour.name"
+                      >
+                    </NuxtLink>
+                  </div>
+                  <h5 class="card-footer mb-0">
+                    <NuxtLink :to="`/tour/${tour.slug}`" 
                       :title="`${tour.days.length} days ${tour.name}`"
-                      class="img-fluid" :alt="tour.name"
-                    >
+                      class="brand-color thin-fonts">
+                      <fai :icon="['fas', 'angle-right']" class="mr-2"></fai>
+                      {{ tour.days.length }} days {{ tour.name }}
+                    </NuxtLink>
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-if="tourCategory.tours.length" class="col-md-5 col-lg-4 mb-3">
+            <div class="card">
+              <h3 class="card-header thin-fonts">African Safari Experiences</h3>
+              <div class="card-body p-0">
+                <div class="list-group list-group-flush">
+                  <NuxtLink 
+                    v-for="category in tourCategories" 
+                    :to="`/safari-tours/${category.slug}`" 
+                    class="list-group-item text-black-50" 
+                    :key="category.id"
+                  >
+                    <fai :icon="['fas','angle-right']" class="mr-2"></fai>
+                    {{ category.name }}
+                    <span v-if="category.tours.length" class="badge badge-pill float-right badge-secondary">
+                      {{ category.tours.length }}
+                    </span>
                   </NuxtLink>
                 </div>
-                <!-- <div class="card-body">
-                  <div class="text-justify text-black-50" v-html="tour.overview"></div>
-                </div> -->
-                <h5 class="card-footer mb-0">
-                  <NuxtLink :to="`/tour/${tour.slug}`" 
-                    :title="`${tour.days.length} days ${tour.name}`"
-                    class="brand-color thin-fonts">
-                    <fai :icon="['fas', 'angle-right']" class="mr-2"></fai>
-                    {{ tour.days.length }} days {{ tour.name }}
-                  </NuxtLink>
-                </h5>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-5 col-lg-4 mb-3">
-          <div class="card">
-            <h3 class="card-header thin-fonts">African Safari Experiences</h3>
-            <div class="card-body p-0">
-              <div class="list-group list-group-flush">
+        <div class="row">
+          <div class="col-lg-12 text-justify">
+            {{ tourCategory.description }}
+            <div class="mt-5">
+              <h3>Other African Safari Experiences</h3>
+              <ul class="list-inline">
                 <NuxtLink 
-                  v-for="category in tourCategories" 
-                  :to="`/safari-tours/${category.slug}`" 
-                  class="list-group-item text-black-50" 
+                  v-for="category in categoriesWithoutCurrentCategory"
+                  :to="`/safari-tours/${category.slug}`"
+                  class="list-inline-item mr-4 text-black-50"
+                  :title="category.name"
                   :key="category.id"
                 >
-                  <fai :icon="['fas','angle-right']" class="mr-2"></fai>
-                  {{ category.name }}
-                  <span v-if="category.tours.length" class="badge badge-pill float-right badge-secondary">
-                    {{ category.tours.length }}
-                  </span>
+                  {{ category.name }} 
+                  {{ category.tours.length 
+                    ? (category.tours.length > 1 
+                      ? ` - ( ${category.tours.length} tours )` 
+                      : ` - ( ${category.tours.length} tour )`) 
+                    : '' }}
                 </NuxtLink>
-              </div>
+              </ul>
             </div>
-          </div>
-        </div>
-      </div>
-      <div v-else class="row">
-        <div class="col-lg-12 text-justify">
-          {{ tourCategory.description }}
-          <div class="mt-5">
-            <h3>Other African Safari Experiences</h3>
-            <ul class="list-inline">
-              <NuxtLink 
-                v-for="category in categoriesWithoutCurrentCategory"
-                :to="`/safari-tours/${category.slug}`"
-                class="list-inline-item mr-4 text-black-50"
-                :title="category.name"
-                :key="category.id"
-              >
-                {{ category.name }} 
-                {{ category.tours.length 
-                  ? (category.tours.length > 1 
-                    ? ` - ( ${category.tours.length} tours )` 
-                    : ` - ( ${category.tours.length} tour )`) 
-                  : '' }}
-              </NuxtLink>
-            </ul>
           </div>
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
-  data() {
-    return {
-      tourCategories: [],
-      tourCategory: {}
-    }
-  },
   computed: {
-    ...mapGetters(['baseURL', 'apiURL']),
+    ...mapGetters({
+      apiURL: 'apiURL',
+      baseURL: 'baseURL',
+      tourCategories: 'tourCategories/tourCategories'
+    }),
+    tourCategory() {
+      return this.tourCategories.find(c => c.slug === this.$route.params.slug)
+    },
     categoriesWithoutCurrentCategory: function() {
       return this.tourCategories.filter(c => c.id !== this.tourCategory.id)
     }
   },
-  activated() {
-    if(this.$fetchState.timestamp <= Date.now() - 3000) this.$fetch();
+  created() {
+    if(this.$fetchState.timestamp > Date.now() - 30000) this.$fetch();
   },
   async fetch() {
-    let categoriesInStore = this.$store.getters.tourCategories;
-    if(!categoriesInStore.length) {
-      const { data: categories } = await this.$axios.get(`${this.apiURL}/tour-categories`);
-      this.tourCategory = categories.find(c => c.slug === this.$route.params.slug);
-      this.tourCategories = categories; this.storeTourCategories(categories);
-    } else {
-      this.tourCategory = categoriesInStore.find(c => c.slug === this.$route.params.slug);
-      this.tourCategories = categoriesInStore;
-    }
-    
+    const { data: categories } = await this.$axios.get(`${this.apiURL}/tour-categories`);
+    this.$store.commit('tourCategories/SET_TOUR_CATEGORIES', categories);
   },
   head() {
     return {
-      title: this.tourCategory.seo_title ? this.tourCategory.seo_title : this.tourCategory.name
+      title: this.tourCategory.seo_title 
+      ? this.tourCategory.seo_title 
+      : this.tourCategory.name
     }
   },
-  methods: {
-    ...mapActions(['storeTourCategories'])
-  }
 }
 </script>
 

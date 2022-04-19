@@ -79,14 +79,11 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters([
-      'pages',
-      'tourCategories',
-      'destinations'
-    ]),
-    // aboutUsPage: function() {
-    //   return this.pages.find(p => p.slug.includes("about"));
-    // },
+    ...mapGetters({
+      pages: 'pages/pages',
+      tourCategories: 'tourCategories/tourCategories',
+      destinations: 'destinations/destinations'
+    }),
     tourCategoriesWithTours: function() {
       return this.tourCategories.filter(c => c.tours.length > 0);
     }

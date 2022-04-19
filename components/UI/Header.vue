@@ -1,18 +1,19 @@
 <template>
   <div id="header">
-    <!-- <div class="topbar">
+    <div class="topbar">
       <div class="container">
         <div class="row">
-          <div class="col-12 text-center text-lg-left col-lg-6">
-            Welcome to Animal Action Safaris, where you see African Animals in Action..!
+          <div class="col-12 text-center text-lg-left col-lg-9">
+            <span class="d-none d-md-inline-block">Welcome to Animal Action Safaris,</span>
+            <span>Discover about Tanzania Wildlife & Lifestyle before you Die..!</span>
           </div>
-          <div class="d-none d-lg-block col-lg-6 text-right">
+          <div class="d-none d-lg-block col-lg-3 text-right">
             <NuxtLink to="/about-us/about-us">About us</NuxtLink>
             <NuxtLink to="/contact-us">Contact us</NuxtLink>
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
     <div class="brand">
       <div class="container pb-4">
         <div class="row px-2">
@@ -26,19 +27,19 @@
           </div>
           <div class="contacts-container">
             <span class="contacts pr-4 d-none d-md-flex">
-              <fai icon="headset" class="contact-icon fa-3x mr-3" />
+              <fai :icon="['fab', 'whatsapp']" class="contact-icon fa-3x mr-3" />
               <span>
                 <a href="tel:+255784268066" class="thin-fonts phone-number">+255 784 268066</a> <br>
-                <a href="mailto:info@aasafaris.com">Send us Email</a>
+                <a href="mailto:info@aasafari.com">info(at)aasafari.com</a>
               </span>
             </span>
-            <!-- <span class="address d-none d-lg-flex ml-2 px-4">
+            <span class="address d-none d-lg-flex ml-2 px-4">
               <fai :icon="['far','building']" class="address-icon fa-3x mr-3" />
               <span>
                 <span class="thin-fonts location">Office at Suye Olorien, Moshono</span> <br>
                 <span>Arusha Tanzania</span>
               </span>
-            </span> -->
+            </span>
             <span class="socials d-none d-md-flex pl-4">
               <a href="#" target="_blank" title="Follow us on Facebook">
                 <fai :icon="['fab', 'facebook']" class="fa-2x text-warning" />
@@ -191,9 +192,27 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'pages','tourCategories','destinations', 'baseURL','showMobileMenu'
-    ])
+    ...mapGetters({
+      apiURL: 'apiURL',
+      pages: 'pages/pages',
+      tourCategories: 'tourCategories/tourCategories',
+      destinations: 'destinations/destinations',
+      showMobileMenu: 'showMobileMenu',
+      baseURL: 'baseURL'
+    })
+  },
+  created() {
+    if(this.$fetchState.timestamp > Date.now() - 30000) this.$fetch();
+  },
+  async fetch() {
+    const { data: pages } = await this.$axios.get(`${this.apiURL}/pages`);
+    const { data: tourCategories } = await this.$axios.get(`${this.apiURL}/tour-categories`);
+    const { data: destinations } = await this.$axios.get(`${this.apiURL}/destinations`);
+
+    if(pages.length) this.$store.commit('pages/SET_PAGES', pages);
+    if(tourCategories.length) this.$store.commit('tourCategories/SET_TOUR_CATEGORIES', tourCategories);
+    if(destinations.length) this.$store.commit('destinations/SET_DESTINATIONS', destinations);
+    
   },
   methods: {
     ...mapMutations(['toggleMobileMenuView']),
@@ -216,7 +235,7 @@ export default {
 .menu ul li a.nuxt-link-exact-active:not(.logo) {
   color: $orange-color !important;
   text-shadow: 0 1px 3px #000;
-  border: 1px dashed $orange-color !important;
+  border: 1px solid $orange-color !important;
   cursor: default;
 }
 
@@ -236,12 +255,13 @@ export default {
 
 
 .topbar {
-  padding: 4px 0;
+  padding: 6px 0;
+  font-family: $serif-font;
   font-size: .8rem;
-  font-weight: 300;
-  background: linear-gradient(#222, #333);
+  // font-weight: bold;
+  background: $orange-color;
   border-bottom: 1px solid #222;
-  color: #ccc;
+  color: rgba($base-color, .7);
 
   .container {
     .row {
@@ -250,15 +270,18 @@ export default {
 
       div {
         a {
-          color: #ccc;
+          color: rgba($base-color, .7);
           margin-left: 10px;
           padding: 2px 4px;
           border-radius: 4px;
           transition: all .3s ease;
+          text-decoration: underline;
+          transition: all .3s ease;
 
           &:hover {
             text-decoration: none;
-            color: white;
+            color: #000;
+            text-decoration: none;
           }
         }
       }
@@ -270,8 +293,11 @@ export default {
 @media only screen and (min-width: 768px) {
   .brand {
     padding: 4px 0;
-    background: $brand-color;
+    // background: $brand-color;
+    background: $gray-color;
     color: white;
+    // border: 2px solid red;
+    height: 90px;
 
     .container {
       .row {
@@ -294,7 +320,13 @@ export default {
           align-items: center;
 
           a {
-            color: rgb(253, 186, 61);
+            color: $orange-color;
+            text-decoration: none;
+            transition: all .3s ease;
+
+            &:hover {
+              color: #fff;
+            }
           }
 
           .contacts {
@@ -304,7 +336,7 @@ export default {
             border-right: 1px dashed rgba($color: orange, $alpha: .3);
 
             .contact-icon {
-              color: rgba($color: orange, $alpha: .3);
+              color: lighten($gray-color, 20);
               text-shadow: 0 1px 3px #000;
             }
 
@@ -320,13 +352,13 @@ export default {
             border-right: 1px dashed rgba($color: orange, $alpha: .3);
 
             .address-icon {
-              color: rgba($color: orange, $alpha: .3);
+              color: lighten($gray-color, 20);
               text-shadow: 0 1px 3px #000;
             }
 
             .location {
               font-size: 22px;
-              // font-weight: bold;
+              color: rgba($color: #fff, $alpha: .7);
             }
           }
         }
@@ -408,16 +440,20 @@ export default {
 // for larger screens
 @media screen and (min-width: 992px) {
   .menu {
+    background: rgba($gray-color, .7);
+    // border: 2px solid red;
+    padding: 0;
+
     ul {
       display: flex;
       position: relative;
-      top: -25px;
-      height: 50px;
+      // top: -25px;
+      height: 35px;
       z-index: 100;
       justify-content: center;
-      background: linear-gradient(lighten($brand-color, 15), darken($brand-color, 15));
-      border-radius: 8px;
-      box-shadow: 0 1px 3px 0 #000;
+      // background: linear-gradient(lighten($brand-color, 15), darken($brand-color, 15));
+      // border-radius: 8px;
+      // box-shadow: 0 1px 3px 0 #000;
 
       li {
         padding: 0;
@@ -436,19 +472,19 @@ export default {
           color: white;
           text-decoration: none;
           margin: 5px 5px;
-          border-radius: 8px;
-          border: 1px dashed rgba($color: $brand-color, $alpha: .1);
+          border-radius: 4px;
+          border: 1px dashed rgba(#fff, $alpha: .2);
           transition: all .3s ease;
 
           &:hover {
-            border: 1px dashed $orange-color;
+            border: 1px solid $orange-color;
           }
         }
 
         .dropdown {
           position: absolute;
           display: none;
-          left: 0; top: 50px;
+          left: 0; top: 44px;
           padding: 10px 0;
           // border: 2px solid red;
 
@@ -465,7 +501,7 @@ export default {
             justify-content: flex-start;
             align-items: flex-start;
             background: linear-gradient(lighten($orange-color, 0), darken($orange-color, 20));
-            border-radius: 8px;
+            border-radius: 4px;
             box-shadow: 0 1px 3px 0 #000;
             font-family: $thin-fonts;
             font-size: 1.1rem;

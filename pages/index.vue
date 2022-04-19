@@ -113,19 +113,16 @@
       </div>
       
       <div class="row mt-5 text-center">
-        <div class="col">
+        <div class="col mb-4">
           <a href="https://tanzaniatourism.go.tz/en" title="TTB" target="_blank"><img src="@/assets/images/ttb.png" alt="TTB"></a>
         </div>
-        <div class="col">
+        <div class="col mb-4">
           <a href="https://tanzaniaparks.go.tz" title="TANAPA" target="_blank"><img src="@/assets/images/tanapa.png" alt="TANAPA"></a>
         </div>
-        <!-- <div class="col">
-          <a href="https://tatotz.org" title="TATO" target="_blank"><img src="@/assets/images/tato.png" alt="TATO"></a>
-        </div> -->
-        <div class="col">
+        <div class="col mb-4">
           <a href="https://tripadvisor.com" title="TripAdvisor" target="_blank"><img src="@/assets/images/tripadvisor.png" alt="Trip Advisor"></a>
         </div>
-        <div class="col">
+        <div class="col mb-4">
           <a href="https://flydoc.org" title="Amref Flying Docs" target="_blank"><img src="@/assets/images/amref.png" alt="Amref"></a>
         </div>
       </div>
@@ -139,12 +136,23 @@ import { sortBy } from 'lodash';
 
 export default {
   computed: {
-    ...mapGetters(['baseURL','tourCategories', 'pages','tours','destinations']),
+    ...mapGetters({
+      baseURL: 'baseURL',
+      tourCategories: 'tourCategories/tourCategories',
+      pages: 'pages/pages',
+      tours: 'tours/tours',
+      destinations: 'destinations/destinations'
+    }),
     about() { return this.pages.find(p => p.slug.includes('about')) },
     featuredTours() { return this.tours.filter(t => +t.featured === 1) },
     limitedTourCategories() {  return [...(sortBy(this.tourCategories.filter(c => c.tours.length > 0), ['tours']))].splice(0,3); },
     limitedDestinations() { let lDs = [...this.destinations]; return lDs.splice(0,6) }
   },
+  head() {
+    return {
+      title: 'Budget Tanzania Safaris & Luxury Holidays - Animal Action Safaris'
+    }
+  }
 }
 </script>
 
