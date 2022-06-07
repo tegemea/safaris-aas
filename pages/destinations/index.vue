@@ -33,7 +33,7 @@
                   :title="destination.name"
                 >
                   <h4 class="thin-fonts text-black-50 m-0 ellipsis">
-                    <fai :icon="['fas','map-marker-alt']" class="mr-2 orange-color"></fai>
+                    <fa-icon :icon="['fas','map-marker-alt']" class="mr-2 orange-color" />
                     {{ destination.name }}
                   </h4>
                 </NuxtLink>

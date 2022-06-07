@@ -21,7 +21,7 @@
             :to="`/about-us/${fPage.slug}`"
             class="link d-block thin-fonts"
           >
-            <fai :icon="['fas','angle-right']" class="mr-2"></fai>
+            <fa-icon :icon="['fas','angle-right']" class="mr-2" />
             {{ fPage.name }}
           </NuxtLink>
         </div>
@@ -33,7 +33,7 @@
             :to="`/safari-tours/${fTourCategory.slug}`"
             class="link d-block thin-fonts"
           >
-            <fai :icon="['fas','angle-right']" class="mr-2"></fai>
+            <fa-icon :icon="['fas','angle-right']" class="mr-2" />
             {{ fTourCategory.name }} ({{ fTourCategory.tours.length }} {{ fTourCategory.tours.length > 1 ? 'tours' : 'tour' }})
           </NuxtLink>
         </div>
@@ -46,7 +46,7 @@
             class="link d-block thin-fonts"
             :title="fDestination.name"
           >
-          <fai :icon="['fas','angle-right']" class="mr-2"></fai>
+          <fa-icon :icon="['fas','angle-right']" class="mr-2" />
           {{ fDestination.name }}
           </NuxtLink>
           <NuxtLink class="link" to="/destinations">See all Destinations</NuxtLink>

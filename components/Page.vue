@@ -36,7 +36,7 @@
             <div class="col-lg-4 col-md-5 side-bar mb-3">
               <div class="card">
                 <h3 class="thin-fonts card-header brand-color">
-                  <fai :icon="['fas','map-marker-alt']" class="mr-3"></fai>
+                  <fa-icon :icon="['fas','map-marker-alt']" class="mr-3" />
                   COMPANY LINKS
                 </h3>
                 <div class="card-body p-0">
@@ -45,7 +45,7 @@
                       v-for="p in sidebarPages"
                       :to="`/about-us/${p.slug}`" 
                       class="list-group-item" :key="p.id">
-                      <fai :icon="['fas', 'angle-right']" class="mr-3"></fai>
+                      <fa-icon :icon="['fas', 'angle-right']" class="mr-3" />
                       {{ p.name }}
                     </NuxtLink>
                   </ul>

@@ -2,9 +2,14 @@
   <div>
     <div class="container-fluid p-0">
       <div class="row">
-        <div v-if="tours.length" class="col-12 p-0">
+        <div class="col-lg-12 photo-container p-0">
           <img :src="`${baseURL}/storage/tour_header_photos/${tours[0].header_photo}`" class="img-fluid" :alt="tours[0].name">
+          <div class="overlay"></div>
+          <div class="title serif-fonts">Discover about Tanzania Wildlife & Lifestyle before you Die..!</div>
         </div>
+        <!-- <div v-if="tours.length" class="col-12 p-0">
+          <img :src="`${baseURL}/storage/tour_header_photos/${tours[0].header_photo}`" class="img-fluid" :alt="tours[0].name">
+        </div> -->
       </div>
     </div>
     <div class="container">
@@ -16,11 +21,14 @@
             ? about.description.substr(0, 300) + '...' 
             : about.description}`"
           ></div>
-          <div class="text-center mt-4">
+          <div class="text-center mt-4 d-flex justify-content-center align-items-center">
             <NuxtLink :to="`/about-us/${about.slug}`" class="btn btn-outline-warning mx-2">
-              <fai :icon="['fas','angle-right']" class="mr-2"></fai> Read More
+              <fa-icon :icon="['fas','angle-right']" class="mr-2" /> Read More
             </NuxtLink>
             <NuxtLink :to="`/safari-tours`" class="btn btn-secondary mx-2">Tanzania Safaris & Tours</NuxtLink>
+            <div class="ml-2">
+              <div id="TA_linkingWidgetRedesign997" class="TA_linkingWidgetRedesign"><ul id="GtdnhA3eny4D" class="TA_links APItbAqe"><li id="LSbjUfSesHP" class="eGBIsj1DSEt"><a target="_blank" href="https://www.tripadvisor.com/Attraction_Review-g297913-d23988397-Reviews-Animal_Action_Safaris_Limited-Arusha_Arusha_Region.html"><img src="https://static.tacdn.com/img2/brand_refresh/Tripadvisor_lockup_horizontal_secondary_registered.svg" alt="TripAdvisor"/></a></li></ul></div><script async src="https://www.jscache.com/wejs?wtype=linkingWidgetRedesign&amp;uniq=997&amp;locationId=23988397&amp;lang=en_US&amp;border=true&amp;display_version=2" data-loadtrk onload="this.loadtrk=true"></script>
+            </div>
           </div>
         </div>
       </div>
@@ -103,7 +111,7 @@
             <div class="card-body">
               <h4 class="thin-fonts text-truncate">
                 <NuxtLink :to="`/destinations/${hDestination.slug}`" class="text-black-50" :title="hDestination.name">
-                  <fai :icon="['fas','map-marker-alt']" class="mr-2"></fai>{{ hDestination.name }}
+                  <fa-icon :icon="['fas','map-marker-alt']" class="mr-2" />{{ hDestination.name }}
                 </NuxtLink>
               </h4>
               <div class="text-justify" v-html="`${hDestination.description.substr(0, 120)}...`"></div>
@@ -112,7 +120,7 @@
         </div>
       </div>
       
-      <div class="row mt-5 text-center">
+      <div class="row mt-5 text-center align-items-center">
         <div class="col mb-4">
           <a href="https://tanzaniatourism.go.tz/en" title="TTB" target="_blank"><img src="@/assets/images/ttb.png" alt="TTB"></a>
         </div>
@@ -120,10 +128,13 @@
           <a href="https://tanzaniaparks.go.tz" title="TANAPA" target="_blank"><img src="@/assets/images/tanapa.png" alt="TANAPA"></a>
         </div>
         <div class="col mb-4">
-          <a href="https://tripadvisor.com" title="TripAdvisor" target="_blank"><img src="@/assets/images/tripadvisor.png" alt="Trip Advisor"></a>
+          <a href="https://www.tripadvisor.com/Attraction_Review-g297913-d23988397-Reviews-Animal_Action_Safaris_Limited-Arusha_Arusha_Region.html" title="TripAdvisor" target="_blank"><img src="@/assets/images/tripadvisor.png" alt="Trip Advisor"></a>
         </div>
         <div class="col mb-4">
           <a href="https://flydoc.org" title="Amref Flying Docs" target="_blank"><img src="@/assets/images/amref.png" alt="Amref"></a>
+        </div>
+        <div class="col mb-4">
+          <div id="TA_cdswritereviewnew824" class="TA_cdswritereviewnew"><ul id="cu3QXR" class="TA_links dJhpjup2E7t"><li id="UWUm2cip2M" class="VZiIAjIkfbKM"><a target="_blank" href="https://www.tripadvisor.com/"><img src="https://static.tacdn.com/img2/brand_refresh/Tripadvisor_lockup_horizontal_secondary_registered.svg" alt="TripAdvisor"/></a></li></ul></div><script async src="https://www.jscache.com/wejs?wtype=cdswritereviewnew&amp;uniq=824&amp;locationId=23988397&amp;lang=en_US&amp;lang=en_US&amp;display_version=2" data-loadtrk onload="this.loadtrk=true"></script>
         </div>
       </div>
     </div>
@@ -158,6 +169,41 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/assets/scss/main';
+
+.photo-container {
+  position: relative;
+
+  .overlay {
+    position: absolute;
+    top: 0; left: 0;
+    background: rgba($color: #000000, $alpha: .4);
+    width: 100%;
+    height: 100%;
+  }
+
+  .title {
+    position: absolute;
+    width: 70%;
+    text-align: center;
+    bottom: 5%;
+    left: 50%;
+    font-family: $square-peg;
+    transform: translateX(-50%);
+    font-size: 4vw;
+    color: #fff;
+    padding: 30px 0;
+    text-shadow: 0 1px 3px #000;
+
+    // &::before {
+    //   Content:'';
+    //   position: absolute;
+    //   top: 0; left: 0;
+    //   width: 30%; height: 100%;
+    //   border-bottom: 4px solid rgba(255, 255, 0, 0.7);
+    //   left: 50%; transform: translateX(-50%);
+    // }
+  }
+}
 
   .featured-tours-container {
     .card {

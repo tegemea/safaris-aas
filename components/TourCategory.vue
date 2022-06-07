@@ -40,7 +40,7 @@
                     <NuxtLink :to="`/tour/${tour.slug}`" 
                       :title="`${tour.days.length} days ${tour.name}`"
                       class="brand-color thin-fonts">
-                      <fai :icon="['fas', 'angle-right']" class="mr-2"></fai>
+                      <fa-icon :icon="['fas', 'angle-right']" class="mr-2" />
                       {{ tour.days.length }} days {{ tour.name }}
                     </NuxtLink>
                   </h5>
@@ -59,7 +59,7 @@
                     class="list-group-item text-black-50" 
                     :key="category.id"
                   >
-                    <fai :icon="['fas','angle-right']" class="mr-2"></fai>
+                    <fa-icon :icon="['fas','angle-right']" class="mr-2" />
                     {{ category.name }}
                     <span v-if="category.tours.length" class="badge badge-pill float-right badge-secondary">
                       {{ category.tours.length }}

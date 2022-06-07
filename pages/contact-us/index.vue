@@ -131,7 +131,6 @@ export default {
       tours: 'tours/tours'
     }),
     randomTour: function() {
-      console.log('random tours');
       return this.tours[Math.floor(Math.random() * this.tours.length)];
     }
   },
@@ -143,7 +142,7 @@ export default {
           if(res.status === 200) {
             this.showSuccessMessage = true;
             setTimeout(() => this.showSuccessMessage = false, 5000);
-            this.tourist.name = ''; this.tourist.email = ''; this.tourist.phone = ''; 
+            this.tourist.name = ''; this.tourist.email = ''; this.tourist.phone = '';
             this.tourist.message = ''; this.tourist.nationality = '';
             this.tourist.tourID = '';
           }

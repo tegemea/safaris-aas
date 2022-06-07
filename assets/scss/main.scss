@@ -1,22 +1,60 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Lato&family=Licorice&family=Noto+Serif:wght@400;700&family=Square+Peg&family=Yanone+Kaffeesatz:wght@300;400&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Lato&family=Licorice&family=Noto+Serif:wght@400;700&family=Square+Peg&family=Yanone+Kaffeesatz:wght@300;400&display=swap');
 
-// @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400&family=Licorice&family=Noto+Serif:wght@400;700&family=Yanone+Kaffeesatz&display=swap');
+@font-face {
+  font-family: 'Yanone Kaffeesatz';
+  src: url('~assets/fonts/ubuntucondensed.woff') format('woff2'),
+    url('~assets/fonts/ubuntucondensed.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Square Peg';
+  src: url('~assets/fonts/squarepeg.woff') format('woff2'),
+    url('~assets/fonts/squarepeg.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Dancing Script';
+  src: url('~assets/fonts/dancingscript.woff') format('woff2'),
+    url('~assets/fonts/dancingscript.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('~assets/fonts/lato.woff') format('woff2'),
+    url('~assets/fonts/lato.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Noto Serif';
+  src: url('~assets/fonts/notoserif.woff') format('woff2'),
+    url('~assets/fonts/notoserif.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Licorice';
+  src: url('~assets/fonts/licorice.woff') format('woff2'),
+    url('~assets/fonts/licorice.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
 
 
-$base-font: 'Lato',
-sans-serif;
-$serif-font: 'Noto Serif',
-serif;
-$thin-fonts: 'Yanone Kaffeesatz',
-sans-serif;
-$cursive-font: 'Licorice',
-cursive;
-
-$dancing-script: 'Dancing Script',
-cursive;
-
-$square-peg: 'Square Peg',
-cursive;
+$base-font: 'Lato';
+$serif-font: 'Noto Serif';
+$thin-fonts: 'Yanone Kaffeesatz';
+$cursive-font: 'Licorice';
+$dancing-script: 'Dancing Script';
+$square-peg: 'Square Peg';
 
 .base-font {
   font-family: $base-font;

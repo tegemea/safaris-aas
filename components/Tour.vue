@@ -39,7 +39,7 @@
                   <div class="d-flex justify-content-between align-items-center flex-column flex-lg-row">
                     <div class="text-center text-lg-left mb-3">
                       <ul class="list-unstyled text-black-50">
-                        <h5 v-for="c in tour.categories" :key="c.id"><fai :icon="['fas','angle-right']" class="mr-2"></fai>{{ c.name }}</h5>
+                        <h5 v-for="c in tour.categories" :key="c.id"><fa-icon :icon="['fas','angle-right']" class="mr-2" />{{ c.name }}</h5>
                       </ul>
                     </div>
                     <div class="text-center mb-3">
@@ -125,7 +125,7 @@
                     :key="theTour.id"
                     class="list-group-item thin-fonts text-black-50"
                   >
-                    <fai :icon="['fas','angle-right']" class="mr-2"></fai>
+                    <fa-icon :icon="['fas','angle-right']" class="mr-2" />
                     {{ theTour.name }}
                   </NuxtLink>
                 </ul>

@@ -25,7 +25,7 @@
         <div class="col-md-5 col-lg-4 side-bar">
           <div class="card">
             <h3 class="thin-fonts card-header brand-color">
-              <fai :icon="['fas','map-marker-alt']" class="mr-3"></fai>
+              <fa-icon :icon="['fas','map-marker-alt']" class="mr-3" />
               SAFARI DESTINATIONS
             </h3>
             <div class="card-body p-0">
@@ -34,7 +34,7 @@
                   v-for="d in sidebarDestinations.slice(0, 5)"
                   :to="`/destinations/${d.slug}`" 
                   class="list-group-item" :key="d.id">
-                  <fai :icon="['fas', 'angle-right']" class="mr-3"></fai>
+                  <fa-icon :icon="['fas', 'angle-right']" class="mr-3" />
                   {{ d.name }} <br>
                   <small class="text-uppercase link-sub-text">
                     {{ d.category.name }}
@@ -42,7 +42,7 @@
                 </NuxtLink>
                 <div class="list-group-item">...</div>
                 <NuxtLink to="#" class="list-group-item">
-                  <fai :icon="['fas', 'angle-right']" class="mr-3"></fai>
+                  <fa-icon :icon="['fas','angle-right']" class="mr-1" />
                   SEE ALL DESTINATIONS
                 </NuxtLink>
               </ul>

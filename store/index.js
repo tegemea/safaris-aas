@@ -1,20 +1,20 @@
 export const state = () => ({
-  // apiURL: `https://aasafari.com/core/api/v1`,
-  apiURL: `http://localhost:8000/api/v1`,
-  // baseURL: `https://aasafari.com`,
-  baseURL: `http://localhost:8000`,
+  apiURL: `https://aasafari.com/core/api/v1`,
+  // apiURL: `http://localhost:8000/api/v1`,
+  baseURL: `https://aasafari.com`,
+  // baseURL: `http://localhost:8000`,
   mobileMenu: false,
 })
 
 export const getters = {
   apiURL(state) { return state.apiURL },
   baseURL(state) { return state.baseURL },
-  showMobileMenu(state) { return state.mobileMenu }
+  MobileMenuVisible(state) { return state.mobileMenu }
 }
 
 export const mutations = {
-  toggleMobileMenuView(state) { state.mobileMenu = !state.mobileMenu },
-  hideMobileMenuView(state) { state.mobileMenu = false }
+  showMobileMenuView(state) { state.mobileMenu = true; },
+  hideMobileMenuView(state) { state.mobileMenu = false; }
 }
 
 export const actions = {

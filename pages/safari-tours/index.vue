@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container pt-5">
-      <div class="row border border-info">
+      <div class="row">
         <div v-if="$fetchState.pending" class="col-12 loading">
           <h1 class="text-black-50">Loading...</h1>
           <span class="spinner"></span>
@@ -9,7 +9,8 @@
         <div v-else-if="$fetchState.error">
           Error while fetching data...
         </div>
-        <div v-if="tourCategories.length">
+        
+        <!-- <div v-if="tourCategories.length"> -->
           <div class="col-md-6" v-for="tourCategory in tourCategories" :key="tourCategory.id">
             <div class="card mb-4">
               <div class="card-body p-0">
@@ -26,7 +27,7 @@
                   class="text-black-50 text-decoration-none"
                   :title="tourCategory.name"
                 >
-                  <fai :icon="['fas','paw']" class="brand-color mr-2"></fai>
+                  <fa-icon :icon="['fas','paw']" class="mr-2" />
                   {{ tourCategory.name }}
                 </NuxtLink>
               </h1>
@@ -43,7 +44,7 @@
                   class="orange-color"
                 >
                   <div class="badge badge-pill badge-secondary">
-                    <fai :icon="['fas','angle-right']" class="mr-1"></fai>
+                    <fa-icon :icon="['fas','angle-right']" class="mr-1" />
                     View {{ tourCategory.name }}
                     <span v-if="tourCategory.tours.length" class="text-warning">
                       - {{ tourCategory.tours.length }}
@@ -54,7 +55,7 @@
               </h4>
             </div>
           </div>
-        </div>
+        <!-- </div> -->
 
       </div>
     </div>

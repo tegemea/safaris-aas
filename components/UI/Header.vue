@@ -3,7 +3,7 @@
     <div class="topbar">
       <div class="container">
         <div class="row">
-          <div class="col-12 text-center text-lg-left col-lg-9">
+          <div class="col-12 text-center text-lg-left col-lg-9 thin-fonts">
             <span class="d-none d-md-inline-block">Welcome to Animal Action Safaris,</span>
             <span>Discover about Tanzania Wildlife & Lifestyle before you Die..!</span>
           </div>
@@ -27,32 +27,34 @@
           </div>
           <div class="contacts-container">
             <span class="contacts pr-4 d-none d-md-flex">
-              <fai :icon="['fab', 'whatsapp']" class="contact-icon fa-3x mr-3" />
+              <fa-icon :icon="['fab', 'whatsapp']" class="contact-icon fa-3x mr-3" />
               <span>
-                <a href="tel:+255784268066" class="thin-fonts phone-number">+255 784 268066</a> <br>
-                <a href="mailto:info@aasafari.com">info(at)aasafari.com</a>
+                <a href="https://wa.me/255784268066" class="thin-fonts phone-number" target="_blank" title="Contact us via WhatsApp">
+                  +255 784 268066
+                </a> <br>
+                <a href="mailto:info@aasafari.com" target="_blank" title="Send us an Email">info(at)aasafari.com</a>
               </span>
             </span>
             <span class="address d-none d-lg-flex ml-2 px-4">
-              <fai :icon="['far','building']" class="address-icon fa-3x mr-3" />
+              <fa-icon :icon="['far','building']" class="address-icon fa-3x mr-3" />
               <span>
                 <span class="thin-fonts location">Office at Suye Olorien, Moshono</span> <br>
                 <span>Arusha Tanzania</span>
               </span>
             </span>
             <span class="socials d-none d-md-flex pl-4">
-              <a href="#" target="_blank" title="Follow us on Facebook">
-                <fai :icon="['fab', 'facebook']" class="fa-2x text-warning" />
+              <a href="https://www.facebook.com/Animal-Action-Safaris-104686595560745/" target="_blank" title="Follow us on Facebook">
+                <fa-icon :icon="['fab', 'facebook']" class="fa-2x text-warning" />
               </a>
               <a href="https://instagram.com/animalactionsafaris" target="_blank" title="Follow us on Instagram">
-                <fai :icon="['fab', 'instagram']" class="fa-2x ml-3 text-warning" />
+                <fa-icon :icon="['fab', 'instagram']" class="fa-2x ml-3 text-warning" />
               </a>
-              <a href="#" target="_blank" title="Contact us on Skype">
-                <fai :icon="['fab', 'skype']" class="fa-2x ml-3 text-warning" />
+              <a href="https://www.linkedin.com/in/animal-action-121742237/" target="_blank" title="Contact us on Skype">
+                <fa-icon :icon="['fab', 'linkedin']" class="fa-2x ml-3 text-warning" />
               </a>
             </span>
-            <button class="d-md-none btn" @click.prevent="toggleMenu">
-              <fai :icon="['fas','bars']" class="fa-2x text-warning"></fai>
+            <button @click.prevent="showMobileMenu" class="d-md-none btn" style="z-index: 300">
+              <fa-icon :icon="['fas','bars']" class="fa-2x text-warning" />
             </button>
           </div>
         </div>
@@ -119,7 +121,7 @@
     </div>
     
     <!-- Main Navigation - Mobile -->
-    <div v-if="showMobileMenu" class="menu" id="menu">
+    <div v-if="MobileMenuVisible" class="menu" id="menu">
       <div class="container">
         <div class="row">
           <div class="col-12 p-0">
@@ -197,9 +199,17 @@ export default {
       pages: 'pages/pages',
       tourCategories: 'tourCategories/tourCategories',
       destinations: 'destinations/destinations',
-      showMobileMenu: 'showMobileMenu',
+      MobileMenuVisible: 'MobileMenuVisible',
       baseURL: 'baseURL'
     })
+  },
+  watch: {
+    $route(to, from) {
+      this.hideMobileMenu();
+    }
+  },
+  mounted() {
+    this.$fb.enable();
   },
   created() {
     if(this.$fetchState.timestamp > Date.now() - 30000) this.$fetch();
@@ -215,9 +225,12 @@ export default {
     
   },
   methods: {
-    ...mapMutations(['toggleMobileMenuView']),
-    toggleMenu() {
-      this.toggleMobileMenuView();
+    ...mapMutations(['showMobileMenuView', 'hideMobileMenuView']),
+    showMobileMenu() {
+      this.showMobileMenuView();
+    },
+    hideMobileMenu() {
+      this.hideMobileMenuView();
     }
   }
 }
@@ -257,7 +270,7 @@ export default {
 .topbar {
   padding: 6px 0;
   font-family: $serif-font;
-  font-size: .8rem;
+  font-size: 1rem;
   // font-weight: bold;
   background: $orange-color;
   border-bottom: 1px solid #222;
@@ -358,7 +371,7 @@ export default {
 
             .location {
               font-size: 22px;
-              color: rgba($color: #fff, $alpha: .7);
+              color: rgba($color: #fff, $alpha: .5);
             }
           }
         }
